@@ -1,14 +1,13 @@
 #include "OptionBasket.hpp"
+using namespace std;
 
-void OptionBasket :: payoff(const PnlMat *path){
+double OptionBasket :: payoff(const PnlMat *path){
     double payoff = 0;
     
-    for(int i = 0; i < path.m; i++){
-        for(int j = 0; j < path.n; j++){
-            payoff += this->weights[j] * path[j,i];
-        }
+    for(int i = 0; i < this->weights->size ; ++i){
+        payoff += this->weights->array[i] * path->array[i];
     }
 
-    return max(payoff - this.strike, 0);
+    return  std::max(payoff - this->strike, 0.0);
 
 }

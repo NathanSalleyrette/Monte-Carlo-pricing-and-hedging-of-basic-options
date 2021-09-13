@@ -2,7 +2,7 @@
 #include <ctime>
 #include "pnl/pnl_random.h"
 #include "pnl/pnl_vector.h"
-#include "OptionBasket.hpp"
+#include "OptionBasket.cpp"
 
 using namespace std;
 
