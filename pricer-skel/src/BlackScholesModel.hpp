@@ -14,6 +14,24 @@ public:
     PnlVect *sigma_; /// vecteur de volatilités
     PnlVect *spot_; /// valeurs initiales des sous-jacents
 
+    BlackScholesModel(int size, double r_, double rho_, const PnlVect *const sigma, const PnlVect *const spot)
+        : size_(size_)
+        , r_(r_)
+        , rho_(rho_)
+        , sigma(sigma)
+        , spot(spot)
+    { }
+
+    ~BlackScholesModel() { }
+
+    BlackScholesModel(const BlackScholesModel &BlackScholesModel)
+        : size_(BlackScholesModel.size_)
+        , r_(BlackScholesModel.r_)
+        , rho_(BlackScholesModel.rho_)
+        , sigma(BlackScholesModel.sigma)
+        , spot(BlackScholesModel.spot)
+    { }
+
     /**
      * Génère une trajectoire du modèle et la stocke dans path
      *
