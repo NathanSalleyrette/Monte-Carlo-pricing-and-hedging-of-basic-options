@@ -44,24 +44,6 @@ add_subdirectory(src/3rdparty/jlparser)
 ### Ne rien modifier dans la partie au dessus de cette ligne.
 
 
-###Google Tests
-add_subdirectory(googletest)
-###
-
-enable_testing()
-
-add_executable(
-  hello_test
-  src/hello_test.cpp
-)
-target_link_libraries(
-  hello_test
-  gtest_main
-)
-
-include(GoogleTest)
-gtest_discover_tests(hello_test)
-
 
 # Test the parser
 add_executable(test-parser src/test_parser.cpp)

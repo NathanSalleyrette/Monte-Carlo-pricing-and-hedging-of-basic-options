@@ -1,3 +1,4 @@
 pricer-skel/build/
-pricer-skel/.vscode
+pricer-skel/.vscode/
 pricer-skel/googletest
+
