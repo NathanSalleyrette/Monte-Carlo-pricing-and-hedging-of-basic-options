@@ -8,9 +8,15 @@ using namespace std;
 
 int main()
 {
-    PnlVect *G0 = pnl_vect_new();
-    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 10.0);
-    PnlMat *M0 = pnl_mat_new();
+    PnlVect *G0 = pnl_vect_create(3);
+    G0->array[0] = 0.5;
+    G0->array[1] = 0.4;
+    G0->array[2] = 0.1;
+    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 2.0);
+    PnlMat *M0 = pnl_mat_create(1,3) ;
+    M0->array[0] = 6.0;
+    M0->array[1] = 3.0;
+    M0->array[2] = 2.0;
     cout << opt.payoff(M0) << endl;
     PnlVect *G = pnl_vect_new();
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
