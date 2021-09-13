@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "matieres/5MMPCPD/**"
             ],
             "defines": [],
             "macFrameworkPath": [],
