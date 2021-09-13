@@ -1,7 +1,9 @@
-#include <gtest/gtest.h>
 // #include "pnl/pnl_random.h"
 // #include "pnl/pnl_vector.h"
 #include "OptionBasket.cpp"
+#include <gtest/gtest.h>
+
+namespace {
 
 // Demonstrate some basic assertions.
 TEST(HelloTest, BasicAssertions) {
@@ -16,9 +18,10 @@ TEST(HelloTest, MoreAssertions) {
     EXPECT_TRUE(true);
 }
 
-// TEST(OptionBasket, Payoff) {
+// TEST(OptionBasket, Entrecote) {
 //     PnlVect *G = pnl_vect_new();
 //     OptionBasket opt = OptionBasket(1.0, 1, 1, G, 10.0);
 //     PnlMat *M = pnl_mat_new();
 //     EXPECT_DOUBLE_EQ(opt.payoff(M), 0.0);
 // }
+}
