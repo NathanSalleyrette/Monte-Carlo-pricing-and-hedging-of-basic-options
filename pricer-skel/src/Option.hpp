@@ -10,10 +10,12 @@ public:
     double T_; /// maturité
     int nbTimeSteps_; /// nombre de pas de temps de discrétisation
     int size_; /// dimension du modèle, redondant avec BlackScholesModel::size_
-    Option(double T_, int nbTimeSteps_, int size_)
+    double strike;
+    Option(double T_, int nbTimeSteps_, int size_, double strike)
         :T_(T_)
         ,nbTimeSteps_(nbTimeSteps_)
         ,size_(size_)
+        ,strike(strike)
     { }
 
     ~Option() { }
@@ -22,6 +24,7 @@ public:
         :T_(Opt.T_)
         ,nbTimeSteps_(Opt.nbTimeSteps_)
         ,size_(Opt.size_)
+        ,strike(Opt.strike)
     { }
 
 
