@@ -3,6 +3,8 @@
 #include "pnl/pnl_random.h"
 #include "pnl/pnl_vector.h"
 #include "OptionBasket.cpp"
+#include "MonteCarlo.cpp"
+#include "BlackScholesModel.hpp"
 
 using namespace std;
 
@@ -12,7 +14,7 @@ int main()
     G0->array[0] = 0.5;
     G0->array[1] = 0.4;
     G0->array[2] = 0.1;
-    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 2.0);
+    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 1.0);
     PnlMat *M0 = pnl_mat_create(1,3) ;
     M0->array[0] = 6.0;
     M0->array[1] = 3.0;
@@ -23,6 +25,18 @@ int main()
     int M = 1E5;
     int dim = 2;
     pnl_rng_sseed(rng, time(NULL));
+
+    // Initialisation Objet BlackScholes
+    PnlVect *Sigma = pnl_vect_create_from_list(3, 0.5, 0.5, 0.5);
+    PnlVect *Spot = pnl_vect_create_from_list(3, 7.0, 8.0, 9.0);
+    BlackScholesModel bl = BlackScholesModel(3, 0.02, 0.15, Sigma, Spot);
+
+    // Initialisation Objet MonteCarlo
+    double prix;
+    double std_dev;
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1);
+    mtc.price(prix, std_dev);
+
 
     double acc = 0., var = 0;
 

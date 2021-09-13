@@ -4,6 +4,7 @@
 #include "BlackScholesModel.hpp"
 #include "pnl/pnl_random.h"
 
+
 class MonteCarlo
 {
 public:
@@ -14,8 +15,23 @@ public:
     int nbSamples_; /*! nombre de tirages Monte Carlo */
 
 
-    MonteCarlo
+    MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_)
+        : mod_(mod_),
+        opt_(opt_),
+        rng_(rng_),
+        fdStep_(fdStep_),
+        nbSamples_(nbSamples_)
+    {}
 
+    ~MonteCarlo() {}
+    
+    MonteCarlo(const MonteCarlo &MonteCarlo)
+        : mod_(MonteCarlo.mod_),
+        opt_(MonteCarlo.opt_),
+        rng_(MonteCarlo.rng_),
+        fdStep_(MonteCarlo.fdStep_),
+        nbSamples_(MonteCarlo.nbSamples_)
+    {}
 
     /**
      * Calcule le prix de l'option à la date 0

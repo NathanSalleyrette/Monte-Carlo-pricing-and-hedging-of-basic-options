@@ -14,12 +14,12 @@ public:
     PnlVect *sigma_; /// vecteur de volatilités
     PnlVect *spot_; /// valeurs initiales des sous-jacents
 
-    BlackScholesModel(int size, double r_, double rho_, const PnlVect *const sigma, const PnlVect *const spot)
+    BlackScholesModel(int size, double r_, double rho_,PnlVect *sigma_, PnlVect *spot_)
         : size_(size_)
         , r_(r_)
         , rho_(rho_)
-        , sigma(sigma)
-        , spot(spot)
+        , sigma_(sigma_)
+        , spot_(spot_)
     { }
 
     ~BlackScholesModel() { }
@@ -28,8 +28,8 @@ public:
         : size_(BlackScholesModel.size_)
         , r_(BlackScholesModel.r_)
         , rho_(BlackScholesModel.rho_)
-        , sigma(BlackScholesModel.sigma)
-        , spot(BlackScholesModel.spot)
+        , sigma_(BlackScholesModel.sigma_)
+        , spot_(BlackScholesModel.spot_)
     { }
 
     /**
@@ -41,8 +41,8 @@ public:
      * @param[in] nbTimeSteps nombre de dates de constatation
      */
     void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
-        for(int i = 0; i<nbTimeSteps ; i++){
-            path->array[i] = 4.0;
+        for(int i = 0; i<nbTimeSteps*3 ; i++){
+            path->array[i] = 180.0;
         }
     }
 
