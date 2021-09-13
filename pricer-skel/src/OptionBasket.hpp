@@ -8,11 +8,12 @@ class OptionBasket : public Option
 {
 private:
     const PnlVect *const weights;
+    
     //string[] underlyingShares;
 public:
 
-    OptionBasket(double T_, int nbTimeSteps_, int size_, const PnlVect *const weights)
-        :Option(T_, nbTimeSteps_, size_),
+    OptionBasket(double T_, int nbTimeSteps_, int size_, const PnlVect *const weights, double strike)
+        :Option(T_, nbTimeSteps_, size_, strike),
         weights(weights)
         //,underlyingShares(underlyingShares)
     { }
@@ -20,14 +21,12 @@ public:
     ~OptionBasket() { }
 
     OptionBasket(const OptionBasket &OptionBasket)
-        :Option(OptionBasket.T_, OptionBasket.nbTimeSteps_, OptionBasket.size_),
+        :Option(OptionBasket.T_, OptionBasket.nbTimeSteps_, OptionBasket.size_, OptionBasket.strike),
         weights(OptionBasket.weights)
         //,underlyingShares(OptionBasket.underlyingShares)
     { }
 
-    double payoff(const PnlMat *path) {
-        return 0.0;
-    }
+    double payoff(const PnlMat *path) override;
 };
 
 

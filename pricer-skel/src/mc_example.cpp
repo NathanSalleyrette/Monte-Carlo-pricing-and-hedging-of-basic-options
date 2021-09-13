@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     PnlVect *G0 = pnl_vect_new();
-    OptionBasket opt = OptionBasket(1.0, 1, 1, G0);
+    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 10.0);
     PnlMat *M0 = pnl_mat_new();
     cout << opt.payoff(M0) << endl;
     PnlVect *G = pnl_vect_new();
