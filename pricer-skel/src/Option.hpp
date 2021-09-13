@@ -10,6 +10,22 @@ public:
     double T_; /// maturité
     int nbTimeSteps_; /// nombre de pas de temps de discrétisation
     int size_; /// dimension du modèle, redondant avec BlackScholesModel::size_
+    Option(double T_, int nbTimeSteps_, int size_)
+        :T_(T_)
+        ,nbTimeSteps_(nbTimeSteps_)
+        ,size_(size_)
+    { }
+
+    ~Option() { }
+
+    Option(const Option &Opt)
+        :T_(Opt.T_)
+        ,nbTimeSteps_(Opt.nbTimeSteps_)
+        ,size_(Opt.size_)
+    { }
+
+
+
     /**
      * Calcule la valeur du payoff sur la trajectoire
      *
