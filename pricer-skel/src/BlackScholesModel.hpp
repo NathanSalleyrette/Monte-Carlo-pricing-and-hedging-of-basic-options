@@ -42,7 +42,7 @@ public:
      */
     void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
         for(int i = 0; i<nbTimeSteps*3 ; i++){
-            path->array[i] = 180.0;
+            path->array[i] = (double) i;
         }
     }
 

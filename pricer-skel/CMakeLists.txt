@@ -53,23 +53,26 @@ target_link_libraries(mc-example jl_parser ${LIBS})
 
 
 
-# ###Google Tests
-# add_subdirectory(googletest)
-# ###
+###Google Tests
+add_subdirectory(googletest)
 
-# enable_testing()
 
-# add_executable(
-#   hello_test
-#   src/hello_test.cpp
-# )
-# target_link_libraries(
-#   hello_test
-#   gtest_main
-# )
+enable_testing()
 
-# include(GoogleTest)
-# gtest_discover_tests(hello_test)
+add_executable(
+  hello_test
+  src/hello_test.cpp
+)
+target_link_libraries(
+  hello_test
+  gtest_main
+  ${LIBS}
+)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)
+pnl_add_postbuild(hello_test)
+###
 
 
 # Print compiler flags

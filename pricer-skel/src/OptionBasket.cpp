@@ -1,4 +1,5 @@
 #include "OptionBasket.hpp"
+#include <iostream>
 using namespace std;
 
 double OptionBasket :: payoff(const PnlMat *path){
