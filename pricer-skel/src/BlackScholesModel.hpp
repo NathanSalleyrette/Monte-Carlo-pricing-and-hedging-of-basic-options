@@ -40,11 +40,8 @@ public:
      * @param[in] T  maturité
      * @param[in] nbTimeSteps nombre de dates de constatation
      */
-    void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
-        for(int i = 0; i<nbTimeSteps*3 ; i++){
-            path->array[i] = (double) i;
-        }
-    }
+    void asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
+    
 
     /**
      * Calcule une trajectoire du modèle connaissant le
