@@ -4,7 +4,7 @@
 #include "pnl/pnl_vector.h"
 #include "OptionBasket.cpp"
 #include "MonteCarlo.cpp"
-#include "BlackScholesModel.hpp"
+#include "BlackScholesModel.cpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main()
     G0->array[0] = 0.5;
     G0->array[1] = 0.4;
     G0->array[2] = 0.1;
-    OptionBasket opt = OptionBasket(1.0, 1, 1, G0, 1.0);
+    OptionBasket opt = OptionBasket(1.0, 300, 3, G0, 1.0);
     PnlMat *M0 = pnl_mat_create(1,3) ;
     M0->array[0] = 6.0;
     M0->array[1] = 3.0;
