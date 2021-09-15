@@ -5,6 +5,8 @@
 #include "OptionBasket.cpp"
 #include "MonteCarlo.cpp"
 #include "BlackScholesModel.cpp"
+#include "OptionAsian.cpp"
+#include "OptionPerformance.cpp"
 
 using namespace std;
 
@@ -14,12 +16,15 @@ int main()
     G0->array[0] = 0.5;
     G0->array[1] = 0.4;
     G0->array[2] = 0.1;
-    OptionBasket opt = OptionBasket(1.0, 252, 3, G0, 10.0);
-    // PnlMat *M0 = pnl_mat_create(1,3) ;
-    // M0->array[0] = 6.0;
-    // M0->array[1] = 3.0;
-    // M0->array[2] = 2.0;
-    // cout << opt.payoff(M0) << endl;
+    OptionPerformance opt = OptionPerformance(1.0, 1, 3, G0, 10.0);
+    PnlMat *M0 = pnl_mat_create(3,2) ;
+    M0->array[0] = 6.0;
+    M0->array[1] = 3.0;
+    M0->array[2] = 2.0;
+    M0->array[3] = 4.0;
+    M0->array[4] = 5.0;
+    M0->array[5] = 1.0;
+    cout << opt.payoff(M0) << endl;
     PnlVect *G = pnl_vect_new();
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     int M = 1E5;

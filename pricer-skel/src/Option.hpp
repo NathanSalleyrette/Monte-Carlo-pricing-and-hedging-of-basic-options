@@ -34,7 +34,7 @@ public:
      *
      * @param[in] path est une matrice de taille (N+1) x d
      * contenant une trajectoire du modèle telle que créée
-     * par la fonction asset.
+     * par la fonction asset. (N = nbTimeSteps_) (d = nombre d'actifs = size_) 
      * @return phi(trajectoire)
      */
     virtual double payoff(const PnlMat *path) = 0;
