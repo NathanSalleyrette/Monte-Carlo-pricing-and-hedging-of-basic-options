@@ -20,17 +20,25 @@ TEST(HelloTest, MoreAssertions) {
     EXPECT_TRUE(true);
 }
 
-TEST(OptionBasket, Entrecote) {
+TEST(OptionBasket, Payoff) {
+    double nbSample = 1;
     PnlVect *G = pnl_vect_create(3);
     G->array[0] = 0.5;
     G->array[1] = 0.4;
     G->array[2] = 0.1;
-    OptionBasket opt = OptionBasket(1.0, 1, 1, G, 1.0);
-    PnlMat *M = pnl_mat_create(1,3);
+    OptionBasket opt = OptionBasket(1.0, nbSample, G->size, G, 1.0);
+    PnlMat *M = pnl_mat_create(G->size,nbSample+1);
     M->array[0] = 6.0;
     M->array[1] = 3.0;
     M->array[2] = 2.0;
-    EXPECT_DOUBLE_EQ(opt.payoff(M), 0.0);
+    M->array[3] = 6.0;
+    M->array[4] = 3.0;
+    M->array[5] = 2.0;
+    EXPECT_DOUBLE_EQ(opt.payoff(M), 3.1000000000000005);
+
+    // On libère la mémoire
+    pnl_vect_free(&G);
+    pnl_mat_free(&M);
 }
 
 TEST(OptionBasket, CalculPrix) {
@@ -55,12 +63,20 @@ TEST(OptionBasket, CalculPrix) {
     MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1000);
     mtc.price(prix, std_dev);
     
-    
+    // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
     EXPECT_DOUBLE_EQ(prix, 1.5070789066119803);
     EXPECT_DOUBLE_EQ(std_dev, 0.17162142732337202);
 
+    // pnl_rng_sseed(rng, 1);
+    // mtc.price(prix, std_dev);
+    // EXPECT_DOUBLE_EQ(prix, 1.5070789066119803);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.17162142732337202);
+
+
+
+    // On libère 
     pnl_vect_free(&G);
     pnl_vect_free(&Sigma);
     pnl_vect_free(&Spot);

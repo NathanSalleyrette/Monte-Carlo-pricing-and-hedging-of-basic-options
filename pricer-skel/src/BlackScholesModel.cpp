@@ -25,6 +25,9 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
             } 
             path->array[s*path->n + i+1] = path->array[s*path->n + i] * exp((this->r_ - this->sigma_->array[s] * this->sigma_->array[s] )/2.0 * step + this->sigma_->array[s]*sqrt(step)*LG  );
         }
+        //On libère G et L a la sortie des for
+        pnl_vect_free(&G);
     }
+    pnl_mat_free(&L);
 
 }

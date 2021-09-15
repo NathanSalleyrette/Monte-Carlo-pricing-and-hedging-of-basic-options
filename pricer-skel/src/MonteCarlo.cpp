@@ -14,6 +14,9 @@ void MonteCarlo::price(double &prix, double &std_dev){
         respayoff = this->opt_->payoff(path);
         price += respayoff;
         squaresum += respayoff * respayoff;
+        
+        //On détruit les objets inutiles
+        pnl_mat_free(&path);
 
 
     }
