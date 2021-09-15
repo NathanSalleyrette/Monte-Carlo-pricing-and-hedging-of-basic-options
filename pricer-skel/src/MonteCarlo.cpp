@@ -26,7 +26,7 @@ void MonteCarlo::price(double &prix, double &std_dev){
         }
         //On détruit les objets inutiles
         pnl_mat_free(&path);
-        pnl_mat_free(&shiftpath);
+        //pnl_mat_free(&shiftpath);
 
 
     }

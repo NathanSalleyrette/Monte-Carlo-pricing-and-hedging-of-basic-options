@@ -15,15 +15,15 @@ public:
     PnlVect *sumShiftSquare; 
 
 
-    MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_)
+    MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_, PnlVect *sumShift, PnlVect *sumShiftSquare)
         : mod_(mod_),
         opt_(opt_),
         rng_(rng_),
         fdStep_(fdStep_),
-        nbSamples_(nbSamples_)
-    {sumShift = pnl_vect_new();
-    sumShiftSquare = pnl_vect_new();
-    }
+        nbSamples_(nbSamples_),
+        sumShift(sumShift),
+        sumShiftSquare(sumShiftSquare)
+    {}
 
     ~MonteCarlo() {}
     
@@ -32,11 +32,10 @@ public:
         opt_(MonteCarlo.opt_),
         rng_(MonteCarlo.rng_),
         fdStep_(MonteCarlo.fdStep_),
-        nbSamples_(MonteCarlo.nbSamples_)
-    {
-        sumShift = MonteCarlo.sumShift;
-        sumShiftSquare = MonteCarlo.sumShiftSquare;
-    }
+        nbSamples_(MonteCarlo.nbSamples_),
+        sumShift(MonteCarlo.sumShift),
+        sumShiftSquare(MonteCarlo.sumShiftSquare)
+    {}
 
     /**
      * Calcule le prix de l'option à la date 0

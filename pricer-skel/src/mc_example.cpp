@@ -31,12 +31,20 @@ int main()
     PnlVect *Spot = pnl_vect_create_from_list(3, 8.0, 12.0, 15.0);
     BlackScholesModel bl = BlackScholesModel(3, 0.02, 0.15, Sigma, Spot);
 
+    PnlVect *sumShift = pnl_vect_create(3);
+    PnlVect *sumShiftSquare = pnl_vect_create(3);
+
     // Initialisation Objet MonteCarlo
     double prix;
     double std_dev;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1000);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1000, sumShift, sumShiftSquare);
     mtc.price(prix, std_dev);
+    PnlVect *deltas = pnl_vect_create(3);
+    PnlVect *std_dev_d = pnl_vect_create(3);
 
+    mtc.delta(deltas, std_dev_d); 
+
+    
 
     double acc = 0., var = 0;
 
