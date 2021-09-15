@@ -31,3 +31,15 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
     pnl_mat_free(&L);
 
 }
+
+void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep){
+    
+    for(int i = 0; i < path->n ; i++){
+        if(i*timestep <= t){
+            shift_path->array[d*path->n + i] = path->array[d*path->n + i];
+        }else {
+            shift_path->array[d*path->n + i] = (1.0+h)*path->array[d*path->n + i];
+        }
+    }
+
+}

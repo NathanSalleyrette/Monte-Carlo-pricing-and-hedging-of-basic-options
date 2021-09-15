@@ -3,8 +3,6 @@
 #include "Option.hpp"
 #include "BlackScholesModel.hpp"
 #include "pnl/pnl_random.h"
-
-
 class MonteCarlo
 {
 public:
@@ -13,6 +11,8 @@ public:
     PnlRng *rng_; /*! pointeur sur le générateur */
     double fdStep_; /*! pas de différence finie */
     int nbSamples_; /*! nombre de tirages Monte Carlo */
+    PnlVect *sumShift;
+    PnlVect *sumShiftSquare; 
 
 
     MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_)
@@ -21,7 +21,9 @@ public:
         rng_(rng_),
         fdStep_(fdStep_),
         nbSamples_(nbSamples_)
-    {}
+    {sumShift = pnl_vect_new();
+    sumShiftSquare = pnl_vect_new();
+    }
 
     ~MonteCarlo() {}
     
@@ -31,7 +33,10 @@ public:
         rng_(MonteCarlo.rng_),
         fdStep_(MonteCarlo.fdStep_),
         nbSamples_(MonteCarlo.nbSamples_)
-    {}
+    {
+        sumShift = MonteCarlo.sumShift;
+        sumShiftSquare = MonteCarlo.sumShiftSquare;
+    }
 
     /**
      * Calcule le prix de l'option à la date 0
