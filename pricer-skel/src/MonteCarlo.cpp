@@ -72,7 +72,7 @@ void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
 
     for(int i = 0; i < this->sumShift->size; i++){
         LET(delta,i) = exp( - this->mod_->r_ * this->opt_->T_)/(this->nbSamples_ * 2 * this->fdStep_ * GET(this->mod_->spot_,i)) * GET(this->sumShift,i);
-        double sigma  = GET(this->sumShiftSquare,i)/this->nbSamples_ - (GET(this->sumShiftSquare,i) /this->nbSamples_)*(GET(this->sumShiftSquare,i)/ this->nbSamples_);
+        double sigma  = GET(this->sumShiftSquare,i)/this->nbSamples_ - (GET(this->sumShift,i) /this->nbSamples_)*(GET(this->sumShift,i)/ this->nbSamples_);
         sigma *= exp(-2 * this->mod_->r_ * this->opt_->T_);
         LET(std_dev,i) = sqrt(sigma) / sqrt(this->nbSamples_);
     }    
