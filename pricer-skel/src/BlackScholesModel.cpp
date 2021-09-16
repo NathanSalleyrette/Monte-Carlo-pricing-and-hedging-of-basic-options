@@ -119,9 +119,9 @@ void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int
     
     for(int i = 0; i < path->n ; i++){
         if(i*timestep <= t){
-            shift_path->array[d*path->n + i] = path->array[d*path->n + i];
+            MLET(shift_path,d, i) = MGET(path,d, i);
         }else {
-            shift_path->array[d*path->n + i] = (1.0+h)*path->array[d*path->n + i];
+            MLET(shift_path,d, i) = (1.0+h)*MGET(path,d, i);
         }
     }
 
