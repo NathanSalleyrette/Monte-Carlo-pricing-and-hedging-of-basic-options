@@ -7,6 +7,8 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
     for(int i = 0; i < path->m; i++){
         pnl_mat_set_diag(L, 1.0, i);
     }
+
+    pnl_mat_set_col(path, this->spot_, 0);
     pnl_mat_chol(L);
     double step = T/(double)nbTimeSteps;
 
@@ -15,13 +17,15 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 
     PnlVect *LignG = pnl_vect_create(path->m);
 
-    for(int j = 0; j<path->m; ++j){
+    for(int j = 0; j < path->m; ++j){
         pnl_mat_get_row(LignL, L, j);
-        for(int i = 0; i<path->n - 1; ++i){
+        for(int i = 0; i < path->n - 1; ++i){
             double LG = 0.0;
             pnl_mat_get_row(LignG, Gmat, i);
             LG = pnl_vect_scalar_prod(LignL, LignG);
-            MLET(path, j,i+1) = MGET(path,j , i) * exp((this->r_ - GET(this->sigma_, j) * GET(this->sigma_,j) /2.0) * step + GET(this->sigma_,j)*sqrt(step)*LG  );
+            
+            double Sj = GET(this->sigma_, j);
+            MLET(path, j,i+1) = MGET(path,j , i) * exp((this->r_ - Sj * Sj /2.0) * step + Sj*sqrt(step)*LG  );
 
 
         }
@@ -49,17 +53,18 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
     PnlMat *L = pnl_mat_create_from_scalar(path->m, path->m, this->rho_);
     
     PnlVect *LignL = pnl_vect_create(path->m);
-
-
+    
     for(int i = 0; i < path->m; i++){
-        L->array[i*(path->m + 1)] = 1;
-        path->array[i*path->n] = this->spot_->array[i];
+        pnl_mat_set_diag(L, 1.0, i);
     }
-    // pnl_mat_set_diag(L, 1.0, d);
-    //
-
+    // Pas besoin de copier past dans path, c'est déjà fait
     pnl_mat_chol(L);
     double step = T/(double)nbTimeSteps;
+
+    // Création de la matrice G randomisée
+    PnlMat *GMat = pnl_mat_create(simuremains, path->m);
+    pnl_mat_rng_normal(GMat, simuremains, path->m, rng);
+    PnlVect *GLign = pnl_vect_create(path->m);
 
     // Pour chaque actif, on fait :
     for (int j = 0; j < path->m; j++) {
@@ -68,16 +73,22 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
         double previous = 1;
         for(int s = 0; s < S->size; s++) {
 
-            PnlVect *G = pnl_vect_create(path->m);
-            pnl_vect_rng_normal(G, path->m, rng);
             double LG = 0;
-
+            pnl_mat_get_row(GLign, GMat, s);
             pnl_mat_get_row(LignL, L, j);
-            LG = pnl_vect_scalar_prod(LignL, G);
+            LG = pnl_vect_scalar_prod(GLign, LignL);
+
+            // Attention, il ne faut pas créer de nouveaux G pour chaque actif (à voir avec le prof)
+            // PnlVect *G = pnl_vect_create(path->m);
+            // pnl_vect_rng_normal(G, path->m, rng);
+            // double LG = 0;
+
+            // pnl_mat_get_row(LignL, L, j);
+            // LG = pnl_vect_scalar_prod(LignL, G);
             
-            if(s != 0) previous = S->array[s-1];
-            
-            S->array[s] = previous * exp((this->r_ - this->sigma_->array[j] * this->sigma_->array[j] )/2.0 * step + this->sigma_->array[j]*sqrt(step)*LG  );
+            if(s != 0) previous = GET(S, s-1);
+            double Sj = GET(this->sigma_, j);
+            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * step + Sj*sqrt(step)*LG  );
 
         }
         pnl_vect_mult_scalar(S, past->array[(j+1)*past->n - 1]);
