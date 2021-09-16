@@ -18,18 +18,18 @@ void MonteCarlo::price(double &prix, double &std_dev){
         sumpayoff += respayoff;
         squaresum += respayoff * respayoff;
 
-        //PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
+        PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
 
-        // for(int d = 0; d < path->m; d++){
-        //     this->mod_->shiftAsset(shiftpath, path, d, this->fdStep_, 0.0, timestep);
-        //     this->sumShift->array[d] += this->opt_->payoff(shiftpath);
-        //     this->mod_->shiftAsset(shiftpath, path, d, -this->fdStep_, 0.0, timestep);
-        //     this->sumShift->array[d] -= this->opt_->payoff(shiftpath);
-        //     this->sumShiftSquare->array[d] = this->sumShift->array[d] * this->sumShift->array[d];
+        for(int d = 0; d < path->m; d++){
+            this->mod_->shiftAsset(shiftpath, path, d, this->fdStep_, 0.0, timestep);
+            LET(this->sumShift,d) = GET(this->sumShift,d)+this->opt_->payoff(shiftpath);
+            this->mod_->shiftAsset(shiftpath, path, d, -this->fdStep_, 0.0, timestep);
+            LET(this->sumShift,d) = GET(this->sumShift,d)-this->opt_->payoff(shiftpath);
+            LET(this->sumShiftSquare,d) = GET(this->sumShift,d)*GET(this->sumShift,d);
             
-        // }
+        }
         //On détruit les objets inutiles
-        //pnl_mat_free(&shiftpath);
+        pnl_mat_free(&shiftpath);
 
 
     }
@@ -71,10 +71,10 @@ void MonteCarlo::price(const PnlMat *past, double t, double &prix, double &std_d
 void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
 
     for(int i = 0; i < this->sumShift->size; i++){
-        delta->array[i] = exp( - this->mod_->r_ * this->opt_->T_)/(this->nbSamples_ * 2 * this->fdStep_ * this->mod_->spot_->array[i]) * this->sumShift->array[i];
-        double sigma  = this->sumShiftSquare->array[i]/this->nbSamples_ - (this->sumShiftSquare->array[i] /this->nbSamples_)*(this->sumShiftSquare->array[i]/ this->nbSamples_);
+        LET(delta,i) = exp( - this->mod_->r_ * this->opt_->T_)/(this->nbSamples_ * 2 * this->fdStep_ * GET(this->mod_->spot_,i)) * GET(this->sumShift,i);
+        double sigma  = GET(this->sumShiftSquare,i)/this->nbSamples_ - (GET(this->sumShiftSquare,i) /this->nbSamples_)*(GET(this->sumShiftSquare,i)/ this->nbSamples_);
         sigma *= exp(-2 * this->mod_->r_ * this->opt_->T_);
-        std_dev->array[i] = 1.96 * sqrt(sigma) / sqrt(this->nbSamples_);
+        LET(std_dev,i) = sqrt(sigma) / sqrt(this->nbSamples_);
     }    
 
 }
