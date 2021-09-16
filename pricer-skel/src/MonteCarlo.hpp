@@ -75,6 +75,24 @@ public:
      * @param[out] std_dev contient l'écart type de l'estimateur
      */
     void delta(PnlVect *delta, PnlVect *std_dev);
+
+
+    /**
+     * Calcul du portefeuille de couverture à la date 0
+     * @param[in] delta contient le vecteur de delta en 0
+     * @param[out] value contient la valeur du portefeuille à la date 0
+     */
+    double portfolioValue(PnlVect *delta);
+
+    /**
+     * Calcul du portefeuille à une date t > 0
+     * @param[in] delta contient le vecteur des delta pour la trajectoire de marché
+     * @param[in] path contient la trajactoire de marché
+     * @param[out] value valeur du portefeuille à l'instant t
+     */
+    double portfolioValue(PnlMat *delta, PnlMat *path);
+
+
 };
 
 
