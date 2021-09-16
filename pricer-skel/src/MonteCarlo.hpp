@@ -15,26 +15,29 @@ public:
     PnlVect *sumShiftSquare; 
 
 
-    MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_, PnlVect *sumShift, PnlVect *sumShiftSquare)
+    MonteCarlo(BlackScholesModel *mod_, Option *opt_, PnlRng *rng_, double fdStep_, int nbSamples_)
         : mod_(mod_),
         opt_(opt_),
         rng_(rng_),
         fdStep_(fdStep_),
-        nbSamples_(nbSamples_),
-        sumShift(sumShift),
-        sumShiftSquare(sumShiftSquare)
-    {}
+        nbSamples_(nbSamples_)
 
-    ~MonteCarlo() {}
+    {
+        this->sumShift = pnl_vect_create(opt_->size_);
+        this->sumShiftSquare = pnl_vect_create(opt_->size_);
+    }
+
+    ~MonteCarlo() {
+        pnl_vect_free(&sumShift);
+        pnl_vect_free(&sumShiftSquare);
+    }
     
     MonteCarlo(const MonteCarlo &MonteCarlo)
         : mod_(MonteCarlo.mod_),
         opt_(MonteCarlo.opt_),
         rng_(MonteCarlo.rng_),
         fdStep_(MonteCarlo.fdStep_),
-        nbSamples_(MonteCarlo.nbSamples_),
-        sumShift(MonteCarlo.sumShift),
-        sumShiftSquare(MonteCarlo.sumShiftSquare)
+        nbSamples_(MonteCarlo.nbSamples_)
     {}
 
     /**

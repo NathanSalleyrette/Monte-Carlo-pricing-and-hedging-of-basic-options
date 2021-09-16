@@ -25,17 +25,14 @@ TEST(CalculPrixInstant0, OptionBasket1) {
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(40, 0.04879, 0.0, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(40);
-    PnlVect *sumShiftSquare = pnl_vect_create(40);
-
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 50000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
     mtc.price(prix, std_dev);
     
-    PnlVect *deltas = pnl_vect_create(3);
-    PnlVect *std_dev_d = pnl_vect_create(3);
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
 
     //mtc.delta(deltas, std_dev_d); 
     // On teste
@@ -55,7 +52,13 @@ TEST(CalculPrixInstant0, OptionBasket1) {
     pnl_vect_free(&G);
     pnl_vect_free(&Sigma);
     pnl_vect_free(&Spot);
+    pnl_vect_free(&deltas);
+    pnl_vect_free(&std_dev_d);
+
     pnl_rng_free(&rng);
+    bl.~BlackScholesModel();
+    mtc.~MonteCarlo();
+
 
 
 }
@@ -76,17 +79,14 @@ TEST(CalculPrixInstant0, OptionBasket2) {
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(40, 0.04879, 0.7, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(40);
-    PnlVect *sumShiftSquare = pnl_vect_create(40);
-
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 50000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
     mtc.price(prix, std_dev);
     
-    PnlVect *deltas = pnl_vect_create(40);
-    PnlVect *std_dev_d = pnl_vect_create(40);
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
 
     //mtc.delta(deltas, std_dev_d); 
     // On teste
@@ -106,7 +106,14 @@ TEST(CalculPrixInstant0, OptionBasket2) {
     pnl_vect_free(&G);
     pnl_vect_free(&Sigma);
     pnl_vect_free(&Spot);
+    pnl_vect_free(&deltas);
+    pnl_vect_free(&std_dev_d);
+
+
     pnl_rng_free(&rng);
+    bl.~BlackScholesModel();
+    mtc.~MonteCarlo();
+
 
 
 }
@@ -127,17 +134,14 @@ TEST(CalculPrixInstant0, OptionBasket3) {
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(40, 0.04879, 0.0, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(40);
-    PnlVect *sumShiftSquare = pnl_vect_create(40);
-
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 50000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
     mtc.price(prix, std_dev);
     
-    PnlVect *deltas = pnl_vect_create(3);
-    PnlVect *std_dev_d = pnl_vect_create(3);
+    PnlVect *deltas = pnl_vect_create(40);
+    PnlVect *std_dev_d = pnl_vect_create(40);
 
     //mtc.delta(deltas, std_dev_d); 
     // On teste
@@ -157,7 +161,14 @@ TEST(CalculPrixInstant0, OptionBasket3) {
     pnl_vect_free(&G);
     pnl_vect_free(&Sigma);
     pnl_vect_free(&Spot);
+    pnl_vect_free(&deltas);
+    pnl_vect_free(&std_dev_d);
+
+
+
     pnl_rng_free(&rng);
+    bl.~BlackScholesModel();
+    mtc.~MonteCarlo();
 
 
 }

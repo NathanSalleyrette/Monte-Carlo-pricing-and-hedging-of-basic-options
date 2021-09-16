@@ -58,13 +58,11 @@ TEST(OptionBasket, CalculPrix) {
     PnlVect *Spot = pnl_vect_create_from_list(3, 8.0, 12.0, 15.0);
     BlackScholesModel bl = BlackScholesModel(3, 0.02, 0.15, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(3);
-    PnlVect *sumShiftSquare = pnl_vect_create(3);
 
     // Initialisation Objet MonteCarlo
     double prix;
     double std_dev;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 1000);
     mtc.price(prix, std_dev);
     
     PnlVect *deltas = pnl_vect_create(3);
@@ -109,13 +107,11 @@ TEST(OptionBasket, CalculPrixInstantT) {
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(40, 0.04879, 0.0, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(40);
-    PnlVect *sumShiftSquare = pnl_vect_create(40);
 
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 50000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 1.0, 50000);
     mtc.price(prix, std_dev);
     
     PnlVect *deltas = pnl_vect_create(3);
@@ -161,13 +157,10 @@ TEST(OptionAsian, CalculAuTemps0) {
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(2, 0.02, 0.0, Sigma, Spot);
 
-    PnlVect *sumShift = pnl_vect_create(2);
-    PnlVect *sumShiftSquare = pnl_vect_create(2);
-
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.02, 50000, sumShift, sumShiftSquare);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.02, 50000);
     mtc.price(prix, std_dev);
     
     PnlVect *deltas = pnl_vect_create(2);
@@ -187,11 +180,9 @@ TEST(OptionAsian, CalculAuTemps0) {
     // EXPECT_DOUBLE_EQ(std_dev, 0.17162142732337202);
 
 
+    PnlVect *sumShift = pnl_vect_create(2);
+    PnlVect *sumShiftSquare = pnl_vect_create(2);
 
-    // On libère 
-    pnl_vect_free(&G);
-    pnl_vect_free(&Sigma);
-    pnl_vect_free(&Spot);
     pnl_rng_free(&rng);
 
 

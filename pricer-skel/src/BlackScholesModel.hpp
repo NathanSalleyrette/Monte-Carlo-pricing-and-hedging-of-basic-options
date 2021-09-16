@@ -13,16 +13,29 @@ public:
     double rho_; /// paramètre de corrélation
     PnlVect *sigma_; /// vecteur de volatilités
     PnlVect *spot_; /// valeurs initiales des sous-jacents
+    PnlMat *El; /// Matrice triangulaire inférieure
+    PnlVect *LignEl; /// Ligne de El
 
-    BlackScholesModel(int size, double r_, double rho_,PnlVect *sigma_, PnlVect *spot_)
+    BlackScholesModel(int size_, double r_, double rho_,PnlVect *sigma_, PnlVect *spot_)
         : size_(size_)
         , r_(r_)
         , rho_(rho_)
         , sigma_(sigma_)
         , spot_(spot_)
-    { }
+    { 
+        this->El = pnl_mat_create_from_scalar(size_, size_, rho_);
+        this->LignEl = pnl_vect_create(size_);
+        for(int i = 0; i < size_; i++){
+            pnl_mat_set_diag(this->El, 1.0, i);
+        }
 
-    ~BlackScholesModel() { }
+        pnl_mat_chol(this->El);
+    }
+
+    ~BlackScholesModel() { 
+        pnl_mat_free(&El);
+        pnl_vect_free(&LignEl);
+    }
 
     BlackScholesModel(const BlackScholesModel &BlackScholesModel)
         : size_(BlackScholesModel.size_)

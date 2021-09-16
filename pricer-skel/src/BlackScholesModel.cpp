@@ -2,15 +2,13 @@
 
 void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
 
-    PnlMat *L = pnl_mat_create_from_scalar(path->m, path->m, this->rho_);
-    PnlVect *LignL = pnl_vect_create(path->m);
-    for(int i = 0; i < path->m; i++){
-        pnl_mat_set_diag(L, 1.0, i);
-    }
-
+    PnlMat *L = this->El;
+    PnlVect *LignL = this->LignEl;
+ 
     pnl_mat_set_col(path, this->spot_, 0);
-    pnl_mat_chol(L);
+
     double step = T/(double)nbTimeSteps;
+    double sqrtstep = sqrt(step);
 
     PnlMat *Gmat = pnl_mat_create(nbTimeSteps, path->m);
     pnl_mat_rng_normal(Gmat, nbTimeSteps, path->m, rng);
@@ -25,11 +23,15 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
             LG = pnl_vect_scalar_prod(LignL, LignG);
             
             double Sj = GET(this->sigma_, j);
-            MLET(path, j,i+1) = MGET(path,j , i) * exp((this->r_ - Sj * Sj /2.0) * step + Sj*sqrt(step)*LG  );
+            MLET(path, j,i+1) = MGET(path,j , i) * exp((this->r_ - Sj * Sj /2.0) * step + Sj*sqrtstep*LG  );
 
 
         }
     }
+
+    pnl_mat_free(&Gmat);
+    pnl_vect_free(&LignG);
+    
 
     // for(int i = 0; i < path->n-1 ; i++ ){
     //     PnlVect *G = pnl_vect_create(path->m);
@@ -50,15 +52,10 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 
 void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past) {
     int simuremains = path->n - past->n + 1;
-    PnlMat *L = pnl_mat_create_from_scalar(path->m, path->m, this->rho_);
-    
-    PnlVect *LignL = pnl_vect_create(path->m);
-    
-    for(int i = 0; i < path->m; i++){
-        pnl_mat_set_diag(L, 1.0, i);
-    }
-    // Pas besoin de copier past dans path, c'est déjà fait
-    pnl_mat_chol(L);
+
+    PnlMat *L = this->El;
+    PnlVect *LignL = this->LignEl;
+
     double step = T/(double)nbTimeSteps;
 
     // Création de la matrice G randomisée
