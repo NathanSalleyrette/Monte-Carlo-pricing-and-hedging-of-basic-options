@@ -54,7 +54,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
     double step = T/(double)nbTimeSteps;
     int simuremains = 0;
     // On distingue le cas t est un temps de discrétisation ou non
-    if (t % step == 0.0) simuremains = path->n - past->n;
+    if (std::fmod(t, step) == 0.0) simuremains = path->n - past->n;
     else simuremains = path->n - past->n + 1;
 
     
