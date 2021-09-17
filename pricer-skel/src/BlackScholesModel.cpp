@@ -51,12 +51,17 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 }
 
 void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past) {
-    int simuremains = path->n - past->n + 1;
+    double step = T/(double)nbTimeSteps;
+    int simuremains = 0;
+    // On distingue le cas t est un temps de discrétisation ou non
+    if (t % step == 0.0) simuremains = path->n - past->n;
+    else simuremains = path->n - past->n + 1;
+
+    
 
     PnlMat *L = this->El;
     PnlVect *LignL = this->LignEl;
 
-    double step = T/(double)nbTimeSteps;
 
     // Création de la matrice G randomisée
     PnlMat *GMat = pnl_mat_create(simuremains, path->m);
