@@ -79,6 +79,26 @@ target_link_libraries(
   ${LIBS}
 )
 
+add_executable(
+  test_asian
+  src/test_asian.cpp
+)
+target_link_libraries(
+  test_asian
+  gtest_main
+  ${LIBS}
+)
+
+add_executable(
+  test_performance
+  src/test_performance.cpp
+)
+target_link_libraries(
+  test_performance
+  gtest_main
+  ${LIBS}
+)
+
 include(GoogleTest)
 gtest_discover_tests(hello_test)
 pnl_add_postbuild(hello_test)

@@ -115,7 +115,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
 void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep){
     
     for(int i = 0; i < path->n ; i++){
-        if(i*timestep <= t){
+        if(i*timestep < t){
             MLET(shift_path,d, i) = MGET(path,d, i);
         }else {
             MLET(shift_path,d, i) = (1.0+h)*MGET(path,d, i);

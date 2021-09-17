@@ -25,10 +25,13 @@ void MonteCarlo::price(double &prix, double &std_dev){
             // PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
             // pnl_mat_clone(shift_path, path);
             this->mod_->shiftAsset(shiftpath, path, d, this->fdStep_, 0.0, timestep);
-            LET(this->sumShift,d) = GET(this->sumShift,d)+this->opt_->payoff(shiftpath);
+            double payoffhplus = this->opt_->payoff(shiftpath);
+            LET(this->sumShift,d) = GET(this->sumShift,d)+payoffhplus;
+            
             this->mod_->shiftAsset(shiftpath, path, d, -this->fdStep_, 0.0, timestep);
-            LET(this->sumShift,d) = GET(this->sumShift,d)-this->opt_->payoff(shiftpath);
-            LET(this->sumShiftSquare,d) = GET(this->sumShift,d)*GET(this->sumShift,d);
+            double payoffhmoins = this->opt_->payoff(shiftpath);
+            LET(this->sumShift,d) = GET(this->sumShift,d)-payoffhmoins;
+            LET(this->sumShiftSquare,d) = GET(this->sumShiftSquare, d) + (payoffhplus-payoffhmoins)*(payoffhplus-payoffhmoins);
             this->mod_->shiftAsset(shiftpath, path, d, 0.0, 0.0, timestep);
 
             
@@ -79,7 +82,9 @@ void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
 
     for(int i = 0; i < this->sumShift->size; i++){
         LET(delta,i) = exp( - this->mod_->r_ * this->opt_->T_)/(this->nbSamples_ * 2 * this->fdStep_ * GET(this->mod_->spot_,i)) * GET(this->sumShift,i);
-        double sigma  = GET(this->sumShiftSquare,i)/this->nbSamples_ - (GET(this->sumShift,i) /this->nbSamples_)*(GET(this->sumShift,i)/ this->nbSamples_);
+        
+        double denom = 2*GET(this->mod_->spot_, i)*this->fdStep_;
+        double sigma  = GET(this->sumShiftSquare,i) /(denom*denom*this->nbSamples_) - (GET(this->sumShift,i) /(denom*this->nbSamples_))*(GET(this->sumShift,i)/(denom*this->nbSamples_));
         sigma *= exp(-2 * this->mod_->r_ * this->opt_->T_);
         LET(std_dev,i) = sqrt(sigma) / sqrt(this->nbSamples_);
     }    

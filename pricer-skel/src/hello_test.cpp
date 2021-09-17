@@ -15,6 +15,52 @@ TEST(HelloTest, BasicAssertions) {
   // Expect equality.
   EXPECT_EQ(7 * 6, 42);
 }
+TEST(OptionAsian2, CalculAuTemps0) {
+  // Initialisation du randomisateur
+    PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
+    pnl_rng_sseed(rng, time(NULL));
+
+    PnlVect *G = pnl_vect_create(2);
+    G->array[0] = 0.5;
+    G->array[1] = 0.5;
+    OptionAsian opt = OptionAsian(1.5, 150, G->size, G, 100);
+
+      // Initialisation Objet BlackScholes
+    PnlVect *Sigma = pnl_vect_create_from_list(2, 0.2, 0.2);
+    PnlVect *Spot = pnl_vect_create_from_list(2, 100.0, 100.0);
+    //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
+    BlackScholesModel bl = BlackScholesModel(2, 0.02, 0.0, Sigma, Spot);
+
+    // Initialisation Objet MonteCarlo
+    double prix = 0.0;
+    double std_dev = 0.0;
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
+    mtc.price(prix, std_dev);
+    
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
+
+    mtc.delta(deltas, std_dev_d); 
+    //pnl_vect_print(deltas);
+    // On teste
+    EXPECT_NE(prix, 0.0);
+    EXPECT_NE(std_dev, 0.0);
+    EXPECT_DOUBLE_EQ(prix, 4.7208);
+    EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
+
+    // pnl_rng_sseed(rng, 1);
+    // mtc.price(prix, std_dev);
+    // EXPECT_DOUBLE_EQ(prix, 1.5070789066119803);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.17162142732337202);
+
+
+    PnlVect *sumShift = pnl_vect_create(2);
+    PnlVect *sumShiftSquare = pnl_vect_create(2);
+
+    pnl_rng_free(&rng);
+
+
+}
 
 TEST(HelloTest, MoreAssertions) {
     EXPECT_FALSE(false);
@@ -160,11 +206,11 @@ TEST(OptionAsian, CalculAuTemps0) {
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.02, 50000);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
     mtc.price(prix, std_dev);
     
-    PnlVect *deltas = pnl_vect_create(2);
-    PnlVect *std_dev_d = pnl_vect_create(2);
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
 
     mtc.delta(deltas, std_dev_d); 
     //pnl_vect_print(deltas);
