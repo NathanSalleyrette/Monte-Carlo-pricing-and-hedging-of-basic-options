@@ -23,8 +23,8 @@ public:
         nbSamples_(nbSamples_)
 
     {
-        this->sumShift = pnl_vect_create(opt_->size_);
-        this->sumShiftSquare = pnl_vect_create(opt_->size_);
+        this->sumShift = pnl_vect_create_from_zero(opt_->size_);
+        this->sumShiftSquare = pnl_vect_create_from_zero(opt_->size_);
     }
 
     ~MonteCarlo() {

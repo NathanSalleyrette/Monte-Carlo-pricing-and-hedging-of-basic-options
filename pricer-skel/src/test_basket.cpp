@@ -28,13 +28,13 @@ TEST(CalculPrixInstant0, OptionBasket1) {
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
     mtc.price(prix, std_dev);
     
     PnlVect *deltas = pnl_vect_create(G->size);
     PnlVect *std_dev_d = pnl_vect_create(G->size);
 
-    //mtc.delta(deltas, std_dev_d); 
+    mtc.delta(deltas, std_dev_d); 
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
@@ -82,13 +82,13 @@ TEST(CalculPrixInstant0, OptionBasket2) {
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
     mtc.price(prix, std_dev);
     
     PnlVect *deltas = pnl_vect_create(G->size);
     PnlVect *std_dev_d = pnl_vect_create(G->size);
 
-    //mtc.delta(deltas, std_dev_d); 
+    mtc.delta(deltas, std_dev_d); 
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);

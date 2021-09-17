@@ -12,29 +12,34 @@ void MonteCarlo::price(double &prix, double &std_dev){
 
     double timestep = this->opt_->T_ / this->opt_->nbTimeSteps_;
     PnlMat *path = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_ + 1);
-    PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
     for(int i = 0; i< this->nbSamples_; i++){
         this->mod_->asset(path, this->opt_->T_ , this->opt_->nbTimeSteps_, this->rng_);
         respayoff = this->opt_->payoff(path);
         sumpayoff += respayoff;
         squaresum += respayoff * respayoff;
-
+        
+        PnlMat *shiftpath = pnl_mat_copy(path);
 
 
         for(int d = 0; d < path->m; d++){
+            // PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
+            // pnl_mat_clone(shift_path, path);
             this->mod_->shiftAsset(shiftpath, path, d, this->fdStep_, 0.0, timestep);
             LET(this->sumShift,d) = GET(this->sumShift,d)+this->opt_->payoff(shiftpath);
             this->mod_->shiftAsset(shiftpath, path, d, -this->fdStep_, 0.0, timestep);
             LET(this->sumShift,d) = GET(this->sumShift,d)-this->opt_->payoff(shiftpath);
             LET(this->sumShiftSquare,d) = GET(this->sumShift,d)*GET(this->sumShift,d);
+            this->mod_->shiftAsset(shiftpath, path, d, 0.0, 0.0, timestep);
+
             
         }
         //On détruit les objets inutiles
+        pnl_mat_free(&shiftpath);
 
 
     }
     pnl_mat_free(&path);
-    pnl_mat_free(&shiftpath);
+    //pnl_mat_free(&shiftpath);
 
 
     prix =  sumpayoff*exp(- this->mod_->r_ * this->opt_->T_) / sample;
