@@ -36,8 +36,9 @@ TEST(CalculPrixInstant0, OptionPerformance) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_DOUBLE_EQ(prix, 1.2573);
-    EXPECT_DOUBLE_EQ(std_dev, 0.000589736);
+    EXPECT_NEAR(prix, 1.2573, 0.000589736);
+    // EXPECT_DOUBLE_EQ(prix, 1.2573);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.000589736);
 
     // pnl_rng_sseed(rng, 1);
     // mtc.price(prix, std_dev);

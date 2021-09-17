@@ -38,8 +38,9 @@ TEST(CalculPrixInstant0, OptionBasket1) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_DOUBLE_EQ(prix, 13.6098);
-    EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
+    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    // EXPECT_DOUBLE_EQ(prix, 13.6098);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
 
     // pnl_rng_sseed(rng, 1);
     // mtc.price(prix, std_dev);
@@ -92,8 +93,9 @@ TEST(CalculPrixInstant0, OptionBasket2) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_DOUBLE_EQ(prix, 9.239495);
-    EXPECT_DOUBLE_EQ(std_dev, 0.055287);
+    EXPECT_NEAR(prix, 9.239495, 0.055287);
+    // EXPECT_DOUBLE_EQ(prix, 9.239495);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.055287);
 
     // pnl_rng_sseed(rng, 1);
     // mtc.price(prix, std_dev);
@@ -147,8 +149,9 @@ TEST(CalculPrixInstant0, OptionBasket3) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_DOUBLE_EQ(prix, 13.631533);
-    EXPECT_DOUBLE_EQ(std_dev, 0.025073);
+    EXPECT_NEAR(prix, 13.631533, 0.025073);
+    // EXPECT_DOUBLE_EQ(prix, 13.631533);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.025073);
 
     // pnl_rng_sseed(rng, 1);
     // mtc.price(prix, std_dev);
