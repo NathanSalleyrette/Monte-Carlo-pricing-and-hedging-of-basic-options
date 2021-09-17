@@ -72,7 +72,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
     for (int j = 0; j < path->m; j++) {
         
         PnlVect *S = pnl_vect_create(simuremains);
-        double previous = 1;
+        double previous = 1.0;
         for(int s = 0; s < S->size; s++) {
 
             double LG = 0;
@@ -90,10 +90,10 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
             
             if(s != 0) previous = GET(S, s-1);
             double Sj = GET(this->sigma_, j);
-            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * step + Sj*sqrt(step)*LG  );
+            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * (step ) + Sj*sqrt(step )*LG  );
 
         }
-        pnl_vect_mult_scalar(S, past->array[(j+1)*past->n - 1]);
+        pnl_vect_mult_scalar(S, past->array[(j+1)*past->n]);
 
         for (int s = 0; s < S->size; s++) {
             path->array[(j+1)*path->n - simuremains + s] = S->array[s];

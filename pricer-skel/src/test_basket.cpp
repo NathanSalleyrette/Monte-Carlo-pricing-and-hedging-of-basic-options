@@ -121,7 +121,7 @@ TEST(CalculPrixInstant0, OptionBasket2) {
 }
 
 
-TEST(CalculPrixInstant0, OptionBasket3) {
+TEST(CalculPrixInstantnonull, OptionBasket1) {
   // Initialisation du randomisateur
     PnlRng *rng = pnl_rng_create(PNL_RNG_MERSENNE);
     pnl_rng_sseed(rng, time(NULL));
@@ -139,19 +139,33 @@ TEST(CalculPrixInstant0, OptionBasket3) {
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
     double std_dev = 0.0;
-    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.000001, 50000);
+    MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
     mtc.price(prix, std_dev);
     
-    PnlVect *deltas = pnl_vect_create(40);
-    PnlVect *std_dev_d = pnl_vect_create(40);
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
 
-    //mtc.delta(deltas, std_dev_d); 
+    mtc.delta(deltas, std_dev_d);
+    // decalage vers la gauche
+    OptionBasket opt2 = OptionBasket(5, 1, G->size, G, 100.0);
+    PnlMat *past = pnl_mat_create_from_scalar(G->size, 2, 100.0);
+
+    mtc.price(past, 2.0, prix, std_dev);
+
+    double prix2 = 0.0;
+    double std_dev2 = 0.0;
+    MonteCarlo mtc2 = MonteCarlo(&bl, &opt2, rng, 0.1, 50000);
+
+    mtc2.price(prix2, std_dev2);
+
+
+
     // On teste
-    EXPECT_NE(prix, 0.0);
-    EXPECT_NE(std_dev, 0.0);
-    EXPECT_NEAR(prix, 13.631533, 0.025073);
-    // EXPECT_DOUBLE_EQ(prix, 13.631533);
-    // EXPECT_DOUBLE_EQ(std_dev, 0.025073);
+    EXPECT_NE(prix, prix2);
+    EXPECT_NE(std_dev, std_dev2);
+    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    // EXPECT_DOUBLE_EQ(prix, 13.6098);
+    // EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
 
     // pnl_rng_sseed(rng, 1);
     // mtc.price(prix, std_dev);
@@ -167,11 +181,10 @@ TEST(CalculPrixInstant0, OptionBasket3) {
     pnl_vect_free(&deltas);
     pnl_vect_free(&std_dev_d);
 
-
-
     pnl_rng_free(&rng);
     bl.~BlackScholesModel();
     mtc.~MonteCarlo();
+
 
 
 }
