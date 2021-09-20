@@ -38,7 +38,8 @@ TEST(CalculPrixInstant0, OptionBasket1) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    // EXPECT_NEAR(prix, 13.603843, 1.96 * 0.025111); (vient du .data)
+    EXPECT_NEAR(prix, 13.6098, 1.96 * 0.0252271);
     // EXPECT_DOUBLE_EQ(prix, 13.6098);
     // EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
 
@@ -93,7 +94,8 @@ TEST(CalculPrixInstant0, OptionBasket2) {
     // On teste
     EXPECT_NE(prix, 0.0);
     EXPECT_NE(std_dev, 0.0);
-    EXPECT_NEAR(prix, 9.239495, 0.055287);
+    // EXPECT_NEAR(prix, 9.239495, 1.96 * 0.055287); (vient du .data)
+    EXPECT_NEAR(prix, 9.21359, 1.96 * 0.0555551);
     // EXPECT_DOUBLE_EQ(prix, 9.239495);
     // EXPECT_DOUBLE_EQ(std_dev, 0.055287);
 
@@ -165,7 +167,8 @@ TEST(CalculPrixInstantnonull, OptionBasket1) {
     // On teste
     EXPECT_NE(prix, prix2);
     EXPECT_NE(std_dev, std_dev2);
-    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    EXPECT_NEAR(prix, prix2, 1.96 * std_dev2);
+    // EXPECT_NEAR(prix, 13.6098, 0.0300791);
 
 
     // On libère 
@@ -228,7 +231,8 @@ TEST(CalculPrixInstantnonull, OptionBasketNouvelle) {
     // On teste
     EXPECT_NE(prix, prix2);
     EXPECT_NE(std_dev, std_dev2);
-    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    EXPECT_NEAR(prix, prix2, 1.96 * std_dev2);
+    // EXPECT_NEAR(prix, 13.6098, 0.0300791);
 
 
     // On libère 
@@ -291,7 +295,8 @@ TEST(CalculPrixInstanttdicretise, OptionBasketNouvelle) {
     // On teste
     EXPECT_NE(prix, prix2);
     EXPECT_NE(std_dev, std_dev2);
-    EXPECT_NEAR(prix, 13.6098, 0.0300791);
+    EXPECT_NEAR(prix, prix2, 1.96 * std_dev2);
+    // EXPECT_NEAR(prix, 13.6098, 0.0300791);
 
 
     // On libère 

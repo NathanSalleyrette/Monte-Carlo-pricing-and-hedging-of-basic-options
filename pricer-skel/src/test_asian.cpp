@@ -38,8 +38,9 @@ TEST(OptionAsian1, CalculAuTemps0) {
 
     // On teste
     EXPECT_NE(prix, 0.0);
-    EXPECT_NE(std_dev, 0.0);
-    EXPECT_NEAR(prix, 4.7208, 0.0300791);
+    EXPECT_NE(std_dev, 0.0);    
+    // EXPECT_NEAR(prix, 4.67, 1.96 * 0.029);
+    EXPECT_NEAR(prix, 4.7208, 1.96 * 0.0300791);
     // EXPECT_DOUBLE_EQ(prix, 4.7208);
     // EXPECT_DOUBLE_EQ(std_dev, 0.0300791);
 
