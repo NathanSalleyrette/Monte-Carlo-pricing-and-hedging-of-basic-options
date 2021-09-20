@@ -52,9 +52,11 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 
 void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeSteps, PnlRng *rng, const PnlMat *past) {
     double step = T/(double)nbTimeSteps;
+    bool tisdiscretisation = std::fmod(t, step) == 0;
+    double interstep = 0;
     int simuremains = 0;
     // On distingue le cas t est un temps de discrétisation ou non
-    if (std::fmod(t, step) == 0.0) simuremains = path->n - past->n;
+    if (tisdiscretisation) simuremains = path->n - past->n;
     else simuremains = path->n - past->n + 1;
 
     
@@ -73,6 +75,12 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
         
         PnlVect *S = pnl_vect_create(simuremains);
         double previous = 1.0;
+
+        // Si t est un temps de discrétisation alors les pas sont tout le temps égaux a step
+        // sinon, le premier pas est la distance entre t et le prochain pas de discrétisation
+        if (tisdiscretisation) interstep = step;
+        else interstep = step - std::fmod(t, step);
+        
         for(int s = 0; s < S->size; s++) {
 
             double LG = 0;
@@ -80,41 +88,21 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
             pnl_mat_get_row(LignL, L, j);
             LG = pnl_vect_scalar_prod(GLign, LignL);
 
-            // Attention, il ne faut pas créer de nouveaux G pour chaque actif (à voir avec le prof)
-            // PnlVect *G = pnl_vect_create(path->m);
-            // pnl_vect_rng_normal(G, path->m, rng);
-            // double LG = 0;
-
-            // pnl_mat_get_row(LignL, L, j);
-            // LG = pnl_vect_scalar_prod(LignL, G);
             
-            if(s != 0) previous = GET(S, s-1);
+            if(s != 0)  {
+                previous = GET(S, s-1);
+                interstep = step;
+            }
             double Sj = GET(this->sigma_, j);
-            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * (step ) + Sj*sqrt(step )*LG  );
+            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * (interstep) + Sj*sqrt(interstep)*LG  );
 
         }
-        pnl_vect_mult_scalar(S, past->array[(j+1)*past->n]);
+        pnl_vect_mult_scalar(S, past->array[(j+1)*past->n - 1]);
 
         for (int s = 0; s < S->size; s++) {
             path->array[(j+1)*path->n - simuremains + s] = S->array[s];
         }
     }
-
-
-
-    // for(int i = 0; i < path->n-1 ; i++ ){
-    //     PnlVect *G = pnl_vect_create(path->m);
-    //     pnl_vect_rng_normal(G, path->m, rng);
-    //     for(int s = 0; s < path->m; s++){
-    //         double LG = 0;
-    //         for(int j = 0 ; j < path->m ; j++){
-    //             LG += L->array[s*path->m +j] * G->array[j];
-    //         } 
-    //     }
-    //     //On libère G et L a la sortie des for
-    //     pnl_vect_free(&G);
-    // }
-    // pnl_mat_free(&L);
 }
 
 void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep){
