@@ -85,7 +85,7 @@ public:
      * @param[in] delta contient le vecteur de delta en 0
      * @param[out] value contient la valeur du portefeuille à la date 0
      */
-    double portfolioValue(PnlVect *delta);
+    void portfolioValue(PnlVect *delta, double &value, double &price);
 
     /**
      * Calcul du portefeuille à une date t > 0
@@ -93,7 +93,9 @@ public:
      * @param[in] path contient la trajactoire de marché
      * @param[out] value valeur du portefeuille à l'instant t
      */
-    double portfolioValue(PnlMat *delta, PnlMat *path);
+    void portfolioValue(PnlVect *deltaNow, PnlVect *deltasLast, double &value, double &H, PnlVect *spots);
+
+    void profitAndLoss(PnlVect *descriptionTime, PnlMat *pathReal, double &error);
 
 
 };
