@@ -89,12 +89,22 @@ public:
 
     /**
      * Calcul du portefeuille à une date t > 0
-     * @param[in] delta contient le vecteur des delta pour la trajectoire de marché
-     * @param[in] path contient la trajactoire de marché
+     * @param[in] deltaNow contient le vecteur des delta pour la trajectoire de marché
+     * @param[in] deltasLast contient un vecteur de delta pour le dernier temps
      * @param[out] value valeur du portefeuille à l'instant t
+     * @param[in] H nombre de dates historiques
+     * @param[in] spots Vecteur contenant les spots
      */
     void portfolioValue(PnlVect *deltaNow, PnlVect *deltasLast, double &value, double &H, PnlVect *spots);
 
+
+    /**
+     * Calcul l'erreur de couverture
+     * @param[in] past contient la matrice avec les valeurs observées à chaque instant
+     * @param[out] error erreur de couverture
+     * @param[out] prix  prix initial
+     * @param[out] std_dev standard deviation initiale
+     */
     void profitAndLoss(PnlMat *past, double &error, double &prix, double &std_dev);
 
 

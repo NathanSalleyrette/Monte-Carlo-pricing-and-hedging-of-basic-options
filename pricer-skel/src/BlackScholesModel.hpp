@@ -86,7 +86,14 @@ public:
      */
     void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
 
-
+    /**
+     * marché simulé sous la probabilité historique
+     * 
+     * @param[out] contient la trajectoire simulée du sous-jacent
+     * @param[in] T maturité de l'option
+     * @param[in] nbTimeSteps nombre de pas dans la trajectoire
+     * @param[in] rng générateur
+     */
     void simul_market(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
 
     void setTrend(double trend);
