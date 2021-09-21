@@ -51,7 +51,8 @@ target_link_libraries(test-parser jl_parser ${LIBS})
 add_executable(mc-example src/mc_example.cpp)
 target_link_libraries(mc-example jl_parser ${LIBS})
 
-
+add_executable(Price0 src/Price0.cpp)
+target_link_libraries(Price0 ${LIBS})
 
 ###Google Tests
 add_subdirectory(googletest)

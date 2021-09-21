@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 
-#include "jlparser/parser.hpp"
+#include "include/jlparser/parser.hpp"
 
 template <typename T>
 std::ostream& operator<< (std::ostream& out, const std::vector<T>& v)
