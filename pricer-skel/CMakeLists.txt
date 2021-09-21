@@ -103,6 +103,16 @@ target_link_libraries(
   ${LIBS}
 )
 
+add_executable(
+  test_portfolio
+  src/test_portfolio.cpp
+)
+target_link_libraries(
+  test_portfolio
+  gtest_main
+  ${LIBS}
+)
+
 include(GoogleTest)
 gtest_discover_tests(hello_test)
 pnl_add_postbuild(hello_test)

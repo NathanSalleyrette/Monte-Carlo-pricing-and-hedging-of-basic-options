@@ -112,7 +112,7 @@ void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
 
 void MonteCarlo :: delta(const PnlMat *past, double t, PnlVect *delta, PnlVect *std_dev){
     for(int i = 0; i < this->sumShift->size; i++){
-        LET(delta,i) = exp( - this->mod_->r_ * (this->opt_->T_ - t))/(this->nbSamples_ * 2 * this->fdStep_ * MGET( past ,i, this->opt_->nbTimeSteps_  )) * GET(this->sumShift,i);
+        LET(delta,i) = exp( - this->mod_->r_ * (this->opt_->T_ - t))/(this->nbSamples_ * 2 * this->fdStep_ * MGET( past ,i, past->n - 1)) * GET(this->sumShift,i);
         
         double denom = 2*GET(this->mod_->spot_, i)*this->fdStep_;
         double sigma  = GET(this->sumShiftSquare,i) /(denom*denom*this->nbSamples_) - (GET(this->sumShift,i) /(denom*this->nbSamples_))*(GET(this->sumShift,i)/(denom*this->nbSamples_));
@@ -144,9 +144,11 @@ void MonteCarlo :: profitAndLoss(PnlMat *pathReal, double &error, double &prix0,
     
     double prix = 0.0;
     double std_dev = 0.0;
-    double step = pathReal->n/this->opt_->nbTimeSteps_;
+    double stepHedging = this->opt_->T_/(pathReal->n - 1);
+    double paststep = this->opt_->T_ / this->opt_->nbTimeSteps_;
+    int step = (int) (pathReal->n - 1)/this->opt_->nbTimeSteps_;
     double value = 0.0;
-    double H = pathReal->n;
+    double H = pathReal->n - 1;
     PnlVect *deltaNow = pnl_vect_create(pathReal->m);
     PnlVect *deltaLast = pnl_vect_create(pathReal->m);
     PnlVect *std_dev_delta = pnl_vect_create(pathReal->m);
@@ -155,20 +157,25 @@ void MonteCarlo :: profitAndLoss(PnlMat *pathReal, double &error, double &prix0,
     delta(deltaNow, std_dev_delta);
     portfolioValue(deltaNow, value, prix0);
 
-    PnlMat *past = pnl_mat_create(this->opt_->nbTimeSteps_, pathReal->m);
+    PnlMat *pastfull = pnl_mat_create(pathReal->m, this->opt_->nbTimeSteps_ + 1);
+    PnlMat *past = pnl_mat_create(pathReal->m, 1);
 
-    for(int i = 0; i < this->opt_->nbTimeSteps_; i++ ){
-        pnl_mat_get_col(lignSpots, pathReal, (int)(i*step));
-        pnl_mat_set_col(past, lignSpots,i);
+    for(int i = 0; i <= this->opt_->nbTimeSteps_; i++ ){
+        pnl_mat_get_col(lignSpots, pathReal, (int)(step*i));
+        pnl_mat_set_col(pastfull, lignSpots,i);
     }
 
     
-
-    for(int i = 0 ; i < pathReal->n ;  i++){
+    // Prix en 0 déjà calculé plus haut, donc on commence au premier élément
+    for(int i = 0 ; i < pathReal->n - 1 ;  i++){
+        
+        
+        int end = (int) (i*stepHedging)/paststep;
+        pnl_mat_extract_subblock(past, pathReal, 0, pathReal->m, 0, end+1);
         // Calcul des différentes valeurs de portefeuille
-        price( past, i * this->opt_->T_ / pathReal->n, prix, std_dev);
+        price( past, i * stepHedging, prix, std_dev);
         deltaLast = pnl_vect_copy(deltaNow);
-        delta(past,i * this->opt_->T_ / pathReal->n ,deltaNow, std_dev_delta);
+        delta(past,i * stepHedging ,deltaNow, std_dev_delta);
         pnl_mat_get_col(lignSpots,pathReal, i);
         portfolioValue(deltaNow,deltaLast,value, H , lignSpots);
     }
