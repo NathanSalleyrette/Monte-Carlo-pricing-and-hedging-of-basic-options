@@ -122,10 +122,21 @@ void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int
         }
     }
 
+    // PnlVect DPathLine = pnl_vect_wrap_mat_row(path, d);
+    // PnlVect DShiftPathLine = pnl_vect_wrap_mat_row(shift_path, d);
+    // for (int i = 0; i < path->n; i++) {
+    //     if(i*timestep < t) {
+    //         LET(&DShiftPathLine, i) = GET(&DPathLine, i);
+    //     } else {
+    //         LET(&DShiftPathLine, i) = (1.0 + h)*GET(&DPathLine, i);
+    //     }
+    // }
+
+
 }
 
 
-void BlackScholesModel :: simuMarket(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
+void BlackScholesModel :: simul_market(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
     PnlMat *L = this->El;
     PnlVect *LignL = this->LignEl;
  
@@ -147,7 +158,7 @@ void BlackScholesModel :: simuMarket(PnlMat *path, double T, int nbTimeSteps, Pn
             LG = pnl_vect_scalar_prod(LignL, LignG);
             
             double Sj = GET(this->sigma_, j);
-            MLET(path, j,i+1) = this->spot_->array[j] * exp((this->trend->array[j] - Sj * Sj /2.0) * step * i + Sj*LG  );
+            MLET(path, j,i+1) = this->spot_->array[j] * exp((this->Trend->array[j] - Sj * Sj /2.0) * step * i + Sj*LG  );
 
 
         }
@@ -155,4 +166,8 @@ void BlackScholesModel :: simuMarket(PnlMat *path, double T, int nbTimeSteps, Pn
 
     pnl_mat_free(&Gmat);
     pnl_vect_free(&LignG);
+}
+
+void BlackScholesModel :: setTrend(double trend) {
+    this->Trend = pnl_vect_create_from_scalar(this->size_, trend);
 }
