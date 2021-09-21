@@ -103,15 +103,22 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
             path->array[(j+1)*path->n - simuremains + s] = S->array[s];
         }
     }
+
+    pnl_mat_free(&GMat);
+    pnl_vect_free(&GLign);    
 }
 
 void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep){
     
+
+    // Nous n'utilisons pas MGET et GET car ils prennent plus de temps que ->array
     for(int i = 0; i < path->n ; i++){
         if(i*timestep < t){
-            MLET(shift_path,d, i) = MGET(path,d, i);
+            shift_path->array[d*path->n + i] = path->array[d*path->n + i];
+            //MLET(shift_path,d, i) = MGET(path,d, i);
         }else {
-            MLET(shift_path,d, i) = (1.0+h)*MGET(path,d, i);
+            shift_path->array[d*path->n + i] = (1.0+h)*path->array[d*path->n + i];
+            //MLET(shift_path,d, i) = (1.0+h)*MGET(path,d, i);
         }
     }
 
