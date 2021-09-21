@@ -33,6 +33,11 @@ TEST(PortfolioValue, basket_2) {
     double error = 0;
     MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.1, 50000);
     mtc.price(prix, std_dev);
+    PnlVect *deltas = pnl_vect_create(G->size);
+    PnlVect *std_dev_d = pnl_vect_create(G->size);
+
+    mtc.delta(deltas, std_dev_d); 
+
     mtc.profitAndLoss(RealPath, error, prix, std_dev);
 
     double fin = 0.0;

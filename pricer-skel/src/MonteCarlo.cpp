@@ -9,6 +9,9 @@ void MonteCarlo::price(double &prix, double &std_dev){
     double respayoff = 0.0;
     double sigma = 0.0;
     double sample = this->nbSamples_;
+    pnl_vect_set_zero(this->sumShift);
+    pnl_vect_set_zero(this->sumShiftSquare);
+
 
     double timestep = this->opt_->T_ / this->opt_->nbTimeSteps_;
     PnlMat *path = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_ + 1);
@@ -61,6 +64,8 @@ void MonteCarlo::price(const PnlMat *past, double t, double &prix, double &std_d
     double sample = this->nbSamples_;
     double timestep = this->opt_->T_ / this->opt_->nbTimeSteps_;
     PnlMat *path = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_ + 1);
+    pnl_vect_set_zero(this->sumShift);
+    pnl_vect_set_zero(this->sumShiftSquare);
 
     for(int i = 0; i< this->nbSamples_; i++){
         pnl_mat_set_subblock(path, past, 0, 0);
@@ -91,6 +96,7 @@ void MonteCarlo::price(const PnlMat *past, double t, double &prix, double &std_d
 
     prix =  price*exp(- this->mod_->r_ * (this->opt_->T_ - t)) / this->nbSamples_;
     sigma = squaresum / this->nbSamples_ - (price / this->nbSamples_)*(price / this->nbSamples_);
+    if (t == this->opt_->T_) sigma = 0.0;
     sigma = sigma*exp(- 2 * this->mod_->r_ * (this->opt_->T_ - t));
     std_dev = sqrt(sigma) / sqrt(this->nbSamples_);
 }
@@ -167,27 +173,31 @@ void MonteCarlo :: profitAndLoss(PnlMat *pathReal, double &error, double &prix0,
 
     
     // Prix en 0 déjà calculé plus haut, donc on commence au premier élément
-    for(int i = 0 ; i < pathReal->n - 1 ;  i++){
+    for(int i = 1 ; i < pathReal->n ;  i++){
         
         
         int end = (int) (i*stepHedging)/paststep;
-        pnl_mat_extract_subblock(past, pathReal, 0, pathReal->m, 0, end+1);
+        pnl_mat_extract_subblock(past, pastfull, 0, pathReal->m, 0, end+1);
         // Calcul des différentes valeurs de portefeuille
         price( past, i * stepHedging, prix, std_dev);
         deltaLast = pnl_vect_copy(deltaNow);
         delta(past,i * stepHedging ,deltaNow, std_dev_delta);
         pnl_mat_get_col(lignSpots,pathReal, i);
         portfolioValue(deltaNow,deltaLast,value, H , lignSpots);
+
+        if (i == pathReal->n - 2) {
+            double r = 0.0;
+        }
+
     }
 
     //Calcul de l'erreur
-
     error = value;
 
     for(int i = 0; i < deltaNow->size   ; i++){
-        error += deltaNow->array[i] * MGET(pathReal, pathReal->n-1, i  );
+        error += deltaNow->array[i] * MGET(pathReal, i, pathReal->n-1);
 
     }
 
-    error -= this->opt_->payoff(past);
+    error -= this->opt_->payoff(pastfull);
 }
