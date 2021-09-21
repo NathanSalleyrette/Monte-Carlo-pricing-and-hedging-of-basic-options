@@ -95,7 +95,7 @@ public:
      */
     void portfolioValue(PnlVect *deltaNow, PnlVect *deltasLast, double &value, double &H, PnlVect *spots);
 
-    void profitAndLoss(PnlVect *descriptionTime, PnlMat *pathReal, double &error);
+    void profitAndLoss(PnlMat *past, double &error, double &prix, double &std_dev);
 
 
 };
