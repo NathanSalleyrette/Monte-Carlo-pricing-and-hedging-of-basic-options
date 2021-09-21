@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PricingResults.hpp"
-#include "PnlVectToJson.hpp"
+#include "PnlVectToJson.cpp"
 
 std::ostream& operator<<(std::ostream &stm, const PricingResults &res)
 {
