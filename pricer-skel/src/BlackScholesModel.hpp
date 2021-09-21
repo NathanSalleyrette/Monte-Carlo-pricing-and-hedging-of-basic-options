@@ -15,6 +15,7 @@ public:
     PnlVect *spot_; /// valeurs initiales des sous-jacents
     PnlMat *El; /// Matrice triangulaire inférieure
     PnlVect *LignEl; /// Ligne de El
+    PnlVect *trend;
 
     BlackScholesModel(int size_, double r_, double rho_,PnlVect *sigma_, PnlVect *spot_)
         : size_(size_)
@@ -84,6 +85,9 @@ public:
      * @param[in] timestep pas de constatation du sous-jacent
      */
     void shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep);
+
+
+    void simuMarket(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng);
 
 };
 

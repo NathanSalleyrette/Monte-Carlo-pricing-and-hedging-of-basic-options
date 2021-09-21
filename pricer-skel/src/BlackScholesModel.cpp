@@ -123,3 +123,36 @@ void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int
     }
 
 }
+
+
+void BlackScholesModel :: simuMarket(PnlMat *path, double T, int nbTimeSteps, PnlRng *rng){
+    PnlMat *L = this->El;
+    PnlVect *LignL = this->LignEl;
+ 
+    pnl_mat_set_col(path, this->spot_, 0);
+
+    double step = T/(double)nbTimeSteps;
+    double sqrtstep = sqrt(step);
+
+    PnlMat *Gmat = pnl_mat_create(nbTimeSteps, path->m);
+    pnl_mat_rng_normal(Gmat, nbTimeSteps, path->m, rng);
+
+    PnlVect *LignG = pnl_vect_create(path->m);
+
+    for(int j = 0; j < path->m; ++j){
+        pnl_mat_get_row(LignL, L, j);
+        for(int i = 0; i < path->n - 1; ++i){
+            double LG = 0.0;
+            pnl_mat_get_row(LignG, Gmat, i);
+            LG = pnl_vect_scalar_prod(LignL, LignG);
+            
+            double Sj = GET(this->sigma_, j);
+            MLET(path, j,i+1) = this->spot_->array[j] * exp((this->trend->array[j] - Sj * Sj /2.0) * step * i + Sj*LG  );
+
+
+        }
+    }
+
+    pnl_mat_free(&Gmat);
+    pnl_vect_free(&LignG);
+}
