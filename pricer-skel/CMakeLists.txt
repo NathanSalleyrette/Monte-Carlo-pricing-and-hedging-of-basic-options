@@ -54,6 +54,9 @@ target_link_libraries(mc-example jl_parser ${LIBS})
 add_executable(Price0 src/Price0.cpp)
 target_link_libraries(Price0 ${LIBS})
 
+add_executable(Hedge src/Hedge.cpp)
+target_link_libraries(Hedge ${LIBS})
+
 ###Google Tests
 add_subdirectory(googletest)
 
