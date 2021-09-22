@@ -7,7 +7,7 @@ double OptionBasket :: payoff(const PnlMat *path){
     double payoff = 0;
 
     for(int i = 0; i < this->weights->size ; ++i){    
-        payoff += GET(this->weights, i) * MGET(path, i, n - 1);
+        payoff += GET(this->weights, i) * MGET(path, i, path->n - 1);
     }
 
     return  std::max(payoff - this->strike, 0.0);

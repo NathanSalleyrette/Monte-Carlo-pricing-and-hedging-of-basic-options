@@ -61,6 +61,10 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
         
         PnlVect *S = pnl_vect_create(simuremains);
         double previous = 1.0;
+        double sj = past->array[(j+1)*past->n - 1];
+        //PnlVect testL = pnl_vect_wrap_mat_row(L, j);
+        pnl_mat_get_row(LignL, L, j);
+
 
         // Si t est un temps de discrétisation alors les pas sont tout le temps égaux a step
         // sinon, le premier pas est la distance entre t et le prochain pas de discrétisation
@@ -71,8 +75,10 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
 
             double LG = 0;
             pnl_mat_get_row(GLign, GMat, s);
-            pnl_mat_get_row(LignL, L, j);
             LG = pnl_vect_scalar_prod(GLign, LignL);
+
+            //PnlVect testG = pnl_vect_wrap_mat_row(GMat, s);
+            //LG = pnl_vect_scalar_prod(&testG, &testL);
 
             
             if(s != 0)  {
@@ -83,7 +89,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
             LET(S, s) = previous * exp((freeRate - Sj* Sj /2.0) * (interstep) + Sj*sqrt(interstep)*LG  );
 
         }
-        pnl_vect_mult_scalar(S, past->array[(j+1)*past->n - 1]);
+        pnl_vect_mult_scalar(S, sj);
 
         for (int s = 0; s < S->size; s++) {
             path->array[(j+1)*path->n - simuremains + s] = S->array[s];

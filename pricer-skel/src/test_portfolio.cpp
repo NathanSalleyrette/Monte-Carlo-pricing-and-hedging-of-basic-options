@@ -39,6 +39,10 @@ TEST(PortfolioValue, basket_2) {
     mtc.delta(deltas, std_dev_d); 
 
     mtc.profitAndLoss(RealPath, error, prix, std_dev);
+    cout << "error    " << error << endl;
+    cout << "prix     " << prix << endl;
+    cout << "std_dev  " << std_dev << endl;
+
 
     double fin = 0.0;
 }
@@ -73,7 +77,9 @@ TEST(PortfolioValue, basket) {
     mtc.delta(deltas, std_dev_d); 
 
     mtc.profitAndLoss(RealPath, error, prix, std_dev);
-
+    cout << "error    " << error << endl;
+    cout << "prix     " << prix << endl;
+    cout << "std_dev  " << std_dev << endl;
     double fin = 0.0;
 }
 
@@ -91,7 +97,7 @@ TEST(PortfolioValue, call_market) {
     PnlVect *Spot = pnl_vect_create_from_scalar(G->size, 100.0);
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(G->size, 0.04879, 0.0, Sigma, Spot);
-    PnlMat *Path = pnl_mat_create_from_file("../data-hedge/basket_market.dat");
+    PnlMat *Path = pnl_mat_create_from_file("../data-hedge/call_market.dat");
     PnlMat *RealPath = pnl_mat_transpose(Path);
 
     // Initialisation Objet MonteCarlo
@@ -106,7 +112,9 @@ TEST(PortfolioValue, call_market) {
     mtc.delta(deltas, std_dev_d); 
 
     mtc.profitAndLoss(RealPath, error, prix, std_dev);
-
+    cout << "error    " << error << endl;
+    cout << "prix     " << prix << endl;
+    cout << "std_dev  " << std_dev << endl;
     double fin = 0.0;
 }
 
