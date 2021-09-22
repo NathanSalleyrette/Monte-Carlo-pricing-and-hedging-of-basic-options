@@ -34,6 +34,7 @@ void MonteCarlo::price(double &prix, double &std_dev){
             this->mod_->shiftAsset(shiftpath, path, d, -this->fdStep_, 0.0, timestep);
             double payoffhmoins = this->opt_->payoff(shiftpath);
             LET(this->sumShift,d) = GET(this->sumShift,d)-payoffhmoins;
+            
             LET(this->sumShiftSquare,d) = GET(this->sumShiftSquare, d) + (payoffhplus-payoffhmoins)*(payoffhplus-payoffhmoins);
             this->mod_->shiftAsset(shiftpath, path, d, 0.0, 0.0, timestep);
 
@@ -104,13 +105,21 @@ void MonteCarlo::price(const PnlMat *past, double t, double &prix, double &std_d
 
 
 void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
-
+    // Calcul de la formule mathématique (4) donnée à la page 4 de l'énoncé.
+    double sample = this->nbSamples_;
     for(int i = 0; i < this->sumShift->size; i++){
-        LET(delta,i) = exp( - this->mod_->r_ * this->opt_->T_)/(this->nbSamples_ * 2 * this->fdStep_ * GET(this->mod_->spot_,i)) * GET(this->sumShift,i);
         
         double denom = 2*GET(this->mod_->spot_, i)*this->fdStep_;
-        double sigma  = GET(this->sumShiftSquare,i) /(denom*denom*this->nbSamples_) - (GET(this->sumShift,i) /(denom*this->nbSamples_))*(GET(this->sumShift,i)/(denom*this->nbSamples_));
-        sigma *= exp(-2 * this->mod_->r_ * this->opt_->T_);
+        double sumshifti = GET(this->sumShift, i);
+        double sumshiftsquarei = GET(this->sumShiftSquare,i);
+        double rT = this->mod_->r_ * this->opt_->T_;
+
+        LET(delta,i) = exp( - rT)/(sample * denom) * sumshifti;
+        
+        double sigma  = sumshiftsquarei /(denom*denom*sample) - (sumshifti /(denom*sample))*(sumshifti/(denom*sample));
+        
+        sigma *= exp(-2 * rT);
+        
         LET(std_dev,i) = sqrt(sigma) / sqrt(this->nbSamples_);
     }    
 
@@ -118,10 +127,13 @@ void MonteCarlo :: delta(PnlVect *delta, PnlVect *std_dev){
 
 
 void MonteCarlo :: delta(const PnlMat *past, double t, PnlVect *delta, PnlVect *std_dev){
+    
+    double sample = this->nbSamples_;
+
     for(int i = 0; i < this->sumShift->size; i++){
         LET(delta,i) = exp( - this->mod_->r_ * (this->opt_->T_ - t))/(this->nbSamples_ * 2 * this->fdStep_ * MGET( past ,i, past->n - 1)) * GET(this->sumShift,i);
         
-        double denom = 2*GET(this->mod_->spot_, i)*this->fdStep_;
+        double denom = 2*MGET( past ,i, past->n - 1)*this->fdStep_;
         double sigma  = GET(this->sumShiftSquare,i) /(denom*denom*this->nbSamples_) - (GET(this->sumShift,i) /(denom*this->nbSamples_))*(GET(this->sumShift,i)/(denom*this->nbSamples_));
         sigma *= exp(-2 * this->mod_->r_ * (this->opt_->T_ - t));
         LET(std_dev,i) = sqrt(sigma) / sqrt(this->nbSamples_);
