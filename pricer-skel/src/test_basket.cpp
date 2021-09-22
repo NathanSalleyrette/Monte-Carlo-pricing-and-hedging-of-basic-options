@@ -150,7 +150,7 @@ TEST(CalculPrixInstantnonull, OptionBasket1) {
     mtc.delta(deltas, std_dev_d);
     // decalage vers la gauche
     OptionBasket opt2 = OptionBasket(1, 1, G->size, G, 100.0);
-    PnlMat *past = pnl_mat_create_from_scalar(G->size, 2, 100.0);
+    PnlMat *past = pnl_mat_create_from_scalar(2, G->size, 100.0);
     double prix = 0.0;
     double std_dev = 0.0;
 
@@ -215,7 +215,7 @@ TEST(CalculPrixInstantnonull, OptionBasketNouvelle) {
 
     double prix = 0.0;
     double std_dev = 0.0;
-    PnlMat *past = pnl_mat_create_from_scalar(G->size, 2, 100.0);
+    PnlMat *past = pnl_mat_create_from_scalar(2, G->size, 100.0);
 
     mtc.price(past, 0.5, prix, std_dev);
 
@@ -279,7 +279,7 @@ TEST(CalculPrixInstanttdicretise, OptionBasketNouvelle) {
 
     double prix = 0.0;
     double std_dev = 0.0;
-    PnlMat *past = pnl_mat_create_from_scalar(G->size, 2, 100.0);
+    PnlMat *past = pnl_mat_create_from_scalar(2, G->size,100.0);
 
     mtc.price(past, 1, prix, std_dev);
 

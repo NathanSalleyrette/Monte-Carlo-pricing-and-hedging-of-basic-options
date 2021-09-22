@@ -24,8 +24,8 @@ TEST(PortfolioValue, basket_2) {
     PnlVect *Spot = pnl_vect_create_from_scalar(G->size, 100.0);
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(G->size, 0.04879, 0.0, Sigma, Spot);
-    PnlMat *Path = pnl_mat_create_from_file("../data-hedge/basket_2d_market.dat");
-    PnlMat *RealPath = pnl_mat_transpose(Path);
+    PnlMat *RealPath = pnl_mat_create_from_file("../data-hedge/basket_2d_market.dat");
+    //PnlMat *RealPath = pnl_mat_transpose(Path);
 
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
@@ -62,8 +62,8 @@ TEST(PortfolioValue, basket) {
     PnlVect *Spot = pnl_vect_create_from_scalar(G->size, 100.0);
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(G->size, 0.04879, 0.0, Sigma, Spot);
-    PnlMat *Path = pnl_mat_create_from_file("../data-hedge/basket_market.dat");
-    PnlMat *RealPath = pnl_mat_transpose(Path);
+    PnlMat *RealPath = pnl_mat_create_from_file("../data-hedge/basket_market.dat");
+    //PnlMat *RealPath = pnl_mat_transpose(Path);
 
     // Initialisation Objet MonteCarlo
     double prix = 0.0;
@@ -97,8 +97,8 @@ TEST(PortfolioValue, call_market) {
     PnlVect *Spot = pnl_vect_create_from_scalar(G->size, 100.0);
     //PnlMat *Past = pnl_mat_create_from_list(3,2, 8.0, 9.0, 12.0, 11.0, 15.0, 15.5);
     BlackScholesModel bl = BlackScholesModel(G->size, 0.04879, 0.0, Sigma, Spot);
-    PnlMat *Path = pnl_mat_create_from_file("../data-hedge/call_market.dat");
-    PnlMat *RealPath = pnl_mat_transpose(Path);
+    PnlMat *RealPath = pnl_mat_create_from_file("../data-hedge/call_market.dat");
+    //PnlMat *RealPath = pnl_mat_transpose(Path);
 
     // Initialisation Objet MonteCarlo
     double prix = 0.0;

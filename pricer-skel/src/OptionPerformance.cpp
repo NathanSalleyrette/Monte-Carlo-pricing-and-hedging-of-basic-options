@@ -10,8 +10,8 @@ double OptionPerformance :: payoff(const PnlMat *path){
         double denom = 0.0;
         double val = 0.0;
         for(int j = 0; j < this->weights->size ; ++j){
-            num += GET(this->weights, j) * MGET(path, j, i);
-            denom += GET(this->weights, j) * MGET(path, j, i - 1);
+            num += GET(this->weights, j) * MGET(path, i, j);
+            denom += GET(this->weights, j) * MGET(path, i-1, j);
         }
         val = max((num / denom) - 1, 0.0);
         payoff += val;
