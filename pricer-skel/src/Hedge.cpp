@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ctime>
-#include "PricingResults.cpp"
+#include "HedgingResults.cpp"
 #include "OptionBasket.cpp"
 #include "OptionPerformance.cpp"
 #include "OptionAsian.cpp"
@@ -31,8 +31,9 @@ int main(int argc, char **argv)
     P->extract("payoff coefficients", pCoef, size);
     P->extract("hedging dates number", nbDates);
     char *marketInfile = argv[1];
-    PnlMat *realPath = pnl_mat_create_from_file(marketInfile);
-    PnlMat *transposeRealPath = pnl_mat_transpose(realpath)
+    
+    PnlMat *realPath = pnl_mat_transpose(pnl_mat_create_from_file(marketInfile));
+    //PnlMat *transposeRealPath = pnl_mat_transpose(realpath)
     // for (int i = 0; i < transposeRealPath->nm){
     //     transposeRealPath->array[i] = 
     // }
@@ -53,7 +54,7 @@ int main(int argc, char **argv)
         OptionBasket opt = OptionBasket(T, timeStep, size, pCoef, strike);
         BlackScholesModel bl = BlackScholesModel(size, r, c, sigma, spot);
         MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.01, n_samples);
-        mtc.profitAndLoss(transposeRealPath, error, prix, prix_std_dev);
+        mtc.profitAndLoss(realPath, error, prix, prix_std_dev);
         // mtc.price(prix, prix_std_dev); 
         // mtc.delta(delta,delta_std_dev);       
     }
@@ -62,7 +63,7 @@ int main(int argc, char **argv)
         OptionAsian opt = OptionAsian(T, timeStep, size, pCoef, strike);
         BlackScholesModel bl = BlackScholesModel(size, r, c, sigma, spot);
         MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.01, n_samples);
-        mtc.profitAndLoss(transposeRealPath, error, prix, prix_std_dev);
+        mtc.profitAndLoss(realPath, error, prix, prix_std_dev);
         // mtc.price(prix, prix_std_dev); 
         // mtc.delta(delta,delta_std_dev); 
     }
@@ -70,11 +71,11 @@ int main(int argc, char **argv)
         OptionPerformance opt = OptionPerformance(T, timeStep, size, pCoef, spot->array[0]);
         BlackScholesModel bl = BlackScholesModel(size, r, c, sigma, spot);
         MonteCarlo mtc = MonteCarlo(&bl, &opt, rng, 0.01, n_samples);
-        mtc.profitAndLoss(transposeRealPath, error, prix, prix_std_dev);
+        mtc.profitAndLoss(realPath, error, prix, prix_std_dev);
         // mtc.price(prix, prix_std_dev); 
         // mtc.delta(delta,delta_std_dev); 
     }
-    PricingResults res = HedgingResulst(prix, prix_std_dev, error);
+    HedgingResults res = HedgingResults(prix, prix_std_dev, error);
     std::cout << res << std::endl;
     
     pnl_vect_free(&spot);
