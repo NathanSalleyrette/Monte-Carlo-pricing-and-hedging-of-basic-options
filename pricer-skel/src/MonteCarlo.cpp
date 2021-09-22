@@ -77,6 +77,7 @@ void MonteCarlo::price(const PnlMat *past, double t, double &prix, double &std_d
 
         PnlMat *shiftpath = pnl_mat_copy(path);
         
+        // Pour tous les actifs
         for(int d = 0; d < path->m; d++){
             // PnlMat *shiftpath = pnl_mat_create(this->opt_->size_, this->opt_->nbTimeSteps_+1);
             // pnl_mat_clone(shift_path, path);
