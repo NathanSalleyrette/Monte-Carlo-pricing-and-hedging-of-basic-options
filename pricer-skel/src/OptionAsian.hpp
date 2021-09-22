@@ -6,9 +6,9 @@
 class OptionAsian : public Option
 {
 private:
-    const PnlVect *const weights;
-    
-    //string[] underlyingShares;
+
+    const PnlVect *const weights;  
+
 public:
 
     OptionAsian(double T_, int nbTimeSteps_, int size_, const PnlVect *const weights, double strike)
