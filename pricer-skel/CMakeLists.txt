@@ -57,31 +57,31 @@ target_link_libraries(Price0 ${LIBS})
 add_executable(Hedge src/Hedge.cpp)
 target_link_libraries(Hedge ${LIBS})
 
-###Google Tests
+##Google Tests
 add_subdirectory(googletest)
 
 
 enable_testing()
 
-add_executable(
-  hello_test
-  src/hello_test.cpp
-)
-target_link_libraries(
-  hello_test
-  gtest_main
-  ${LIBS}
-)
+# add_executable(
+#   hello_test
+#   src/hello_test.cpp
+# )
+# target_link_libraries(
+#   hello_test
+#   gtest_main
+#   ${LIBS}
+# )
 
 add_executable(
-  test_basket
-  src/test_basket.cpp
-)
+   test_basket
+   src/test_basket.cpp
+ )
 target_link_libraries(
   test_basket
   gtest_main
-  ${LIBS}
-)
+   ${LIBS}
+ )
 
 add_executable(
   test_asian
@@ -113,9 +113,9 @@ target_link_libraries(
   ${LIBS}
 )
 
-include(GoogleTest)
-gtest_discover_tests(hello_test)
-pnl_add_postbuild(hello_test)
+# include(GoogleTest)
+# gtest_discover_tests(hello_test)
+# pnl_add_postbuild(hello_test)
 ###
 
 

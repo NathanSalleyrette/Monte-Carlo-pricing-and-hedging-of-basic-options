@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     P->extract("hedging dates number", nbDates);
     char *marketInfile = argv[1];
     
-    PnlMat *realPath = pnl_mat_transpose(pnl_mat_create_from_file(marketInfile));
+    PnlMat *realPath = pnl_mat_create_from_file(marketInfile);
     //PnlMat *transposeRealPath = pnl_mat_transpose(realpath)
     // for (int i = 0; i < transposeRealPath->nm){
     //     transposeRealPath->array[i] = 
