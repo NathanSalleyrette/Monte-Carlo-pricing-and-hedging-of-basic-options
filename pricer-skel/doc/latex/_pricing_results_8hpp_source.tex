@@ -1,0 +1,56 @@
+\hypertarget{_pricing_results_8hpp_source}{}\doxysection{Pricing\+Results.\+hpp}
+\label{_pricing_results_8hpp_source}\index{src/PricingResults.hpp@{src/PricingResults.hpp}}
+\mbox{\hyperlink{_pricing_results_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}pnl/pnl\_vector.h"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{class }\mbox{\hyperlink{class_pricing_results}{PricingResults}}}
+\DoxyCodeLine{6 \{}
+\DoxyCodeLine{7 \textcolor{keyword}{private}:}
+\DoxyCodeLine{8     \textcolor{keywordtype}{double} price;}
+\DoxyCodeLine{9     \textcolor{keyword}{const} PnlVect * delta;}
+\DoxyCodeLine{10     \textcolor{keywordtype}{double} priceStdDev;}
+\DoxyCodeLine{11     \textcolor{keyword}{const} PnlVect *deltaStdDev;}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     \mbox{\hyperlink{class_pricing_results_add0cdad758e7c190fbd27ef5003e9f27}{PricingResults}}(\textcolor{keywordtype}{double} price, \textcolor{keywordtype}{double} priceStdDev, \textcolor{keyword}{const} PnlVect *\textcolor{keyword}{const} delta, \textcolor{keyword}{const} PnlVect *\textcolor{keyword}{const} deltaStdDev)}
+\DoxyCodeLine{14         : price(price)}
+\DoxyCodeLine{15         , priceStdDev(priceStdDev)}
+\DoxyCodeLine{16         , delta(delta)}
+\DoxyCodeLine{17         , deltaStdDev(deltaStdDev)}
+\DoxyCodeLine{18     \{ \}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \mbox{\hyperlink{class_pricing_results_ad7c1fe2434432e468a52e15bff5548b1}{\string~PricingResults}}() \{ \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \mbox{\hyperlink{class_pricing_results_ad69a1ade54f16b703e72cea526138e0f}{PricingResults}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_pricing_results}{PricingResults}} \&pr)}
+\DoxyCodeLine{23         : price(pr.price)}
+\DoxyCodeLine{24         , priceStdDev(pr.priceStdDev)}
+\DoxyCodeLine{25         , delta(pr.delta)}
+\DoxyCodeLine{26         , deltaStdDev(pr.deltaStdDev)}
+\DoxyCodeLine{27     \{ \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_pricing_results_a417eba13bef57ebf86f9a5892a4ea827}{Price}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{30 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} price;}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_pricing_results_af8eeec1b0c9c4255fb0e23f179f0c1b0}{PriceStdDev}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{35 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{36         \textcolor{keywordflow}{return} priceStdDev;}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{const} PnlVect * \textcolor{keyword}{const} \mbox{\hyperlink{class_pricing_results_acce8096864a159aa4b8c51508d22264d}{Delta}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{40 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{41         \textcolor{keywordflow}{return} delta;}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keyword}{const} PnlVect * \textcolor{keyword}{const} \mbox{\hyperlink{class_pricing_results_aa7a739195d26b2c94cf5c54f2d14c20c}{DeltaStdDev}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{45 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{46         \textcolor{keywordflow}{return} deltaStdDev;}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keyword}{friend} std::ostream\& \mbox{\hyperlink{class_pricing_results_aa4a40ce381ba595a95c12527d75082c8}{operator<<}}(std::ostream \&stm, \textcolor{keyword}{const} \mbox{\hyperlink{class_pricing_results}{PricingResults}} \&res);}
+\DoxyCodeLine{50 \};}
+
+\end{DoxyCode}

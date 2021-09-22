@@ -1,0 +1,72 @@
+\hypertarget{class_option_basket}{}\doxysection{Option\+Basket Class Reference}
+\label{class_option_basket}\index{OptionBasket@{OptionBasket}}
+
+
+{\ttfamily \#include $<$Option\+Basket.\+hpp$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_option}{Option}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_option_basket_ae3babb0dca81e778a2b3840714bf1e83}{Option\+Basket}} (double \mbox{\hyperlink{class_option_a89f0365b68626cc5eb523f12159e0764}{T\+\_\+}}, int \mbox{\hyperlink{class_option_ad424223ea2698144e823c494d625fbe0}{nb\+Time\+Steps\+\_\+}}, int \mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\+\_\+}}, const Pnl\+Vect $\ast$const weights, double \mbox{\hyperlink{class_option_a44d5a8d4c38ecd80145c0f1e5df50703}{strike}})
+\item 
+\mbox{\hyperlink{class_option_basket_ac7659d329b23d98bfb734dde559e6602}{$\sim$\+Option\+Basket}} ()
+\item 
+\mbox{\hyperlink{class_option_basket_a6aff20ae993721a20a2f4692b51ea8b3}{Option\+Basket}} (const \mbox{\hyperlink{class_option_basket}{Option\+Basket}} \&\mbox{\hyperlink{class_option_basket}{Option\+Basket}})
+\item 
+double \mbox{\hyperlink{class_option_basket_ae8577fed2f240c65c1feaf7c1c4af678}{payoff}} (const Pnl\+Mat $\ast$path) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_option_basket_ae3babb0dca81e778a2b3840714bf1e83}\label{class_option_basket_ae3babb0dca81e778a2b3840714bf1e83}} 
+\index{OptionBasket@{OptionBasket}!OptionBasket@{OptionBasket}}
+\index{OptionBasket@{OptionBasket}!OptionBasket@{OptionBasket}}
+\doxysubsubsection{\texorpdfstring{OptionBasket()}{OptionBasket()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Option\+Basket\+::\+Option\+Basket (\begin{DoxyParamCaption}\item[{double}]{T\+\_\+,  }\item[{int}]{nb\+Time\+Steps\+\_\+,  }\item[{int}]{size\+\_\+,  }\item[{const Pnl\+Vect $\ast$const}]{weights,  }\item[{double}]{strike }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_option_basket_ac7659d329b23d98bfb734dde559e6602}\label{class_option_basket_ac7659d329b23d98bfb734dde559e6602}} 
+\index{OptionBasket@{OptionBasket}!````~OptionBasket@{$\sim$OptionBasket}}
+\index{````~OptionBasket@{$\sim$OptionBasket}!OptionBasket@{OptionBasket}}
+\doxysubsubsection{\texorpdfstring{$\sim$OptionBasket()}{~OptionBasket()}}
+{\footnotesize\ttfamily Option\+Basket\+::$\sim$\+Option\+Basket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_option_basket_a6aff20ae993721a20a2f4692b51ea8b3}\label{class_option_basket_a6aff20ae993721a20a2f4692b51ea8b3}} 
+\index{OptionBasket@{OptionBasket}!OptionBasket@{OptionBasket}}
+\index{OptionBasket@{OptionBasket}!OptionBasket@{OptionBasket}}
+\doxysubsubsection{\texorpdfstring{OptionBasket()}{OptionBasket()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Option\+Basket\+::\+Option\+Basket (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_option_basket}{Option\+Basket}} \&}]{Option\+Basket }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_option_basket_ae8577fed2f240c65c1feaf7c1c4af678}\label{class_option_basket_ae8577fed2f240c65c1feaf7c1c4af678}} 
+\index{OptionBasket@{OptionBasket}!payoff@{payoff}}
+\index{payoff@{payoff}!OptionBasket@{OptionBasket}}
+\doxysubsubsection{\texorpdfstring{payoff()}{payoff()}}
+{\footnotesize\ttfamily double Option\+Basket\+::payoff (\begin{DoxyParamCaption}\item[{const Pnl\+Mat $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Calcule la valeur du payoff sur la trajectoire
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em path} & est une matrice de taille (N+1) x d contenant une trajectoire du modèle telle que créée par la fonction asset. (N = nb\+Time\+Steps\+\_\+) (d = nombre d\textquotesingle{}actifs = size\+\_\+) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+phi(trajectoire) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_option_abe90882a11f5436077425249e3f32204}{Option}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_option_basket_8hpp}{Option\+Basket.\+hpp}}\item 
+src/\mbox{\hyperlink{_option_basket_8cpp}{Option\+Basket.\+cpp}}\end{DoxyCompactItemize}

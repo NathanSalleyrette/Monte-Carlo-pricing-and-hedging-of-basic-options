@@ -1,0 +1,158 @@
+\hypertarget{parser_8hpp_source}{}\doxysection{parser.\+hpp}
+\label{parser_8hpp_source}\index{src/3rdparty/jlparser/include/jlparser/parser.hpp@{src/3rdparty/jlparser/include/jlparser/parser.hpp}}
+\mbox{\hyperlink{parser_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PARSER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PARSER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}pnl/pnl\_matrix.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <cctype>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <variant>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define MAX\_CHAR\_LINE 1024}}
+\DoxyCodeLine{17 \textcolor{comment}{// \#define DEBUG}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{/* list of possible types */}}
+\DoxyCodeLine{20 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa26c5769a44ea25ffe1407c6a0bfdb862}{T\_NULL}},}
+\DoxyCodeLine{23   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faa30cbb0eb56b7263a35f9d6643e12c83}{T\_INT}},}
+\DoxyCodeLine{24   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa1f8887255ce9ce523e5c497f14d9d842}{T\_LONG}},}
+\DoxyCodeLine{25   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa875b555dccbb4f76c01f6d3b64cb23be}{T\_DOUBLE}},}
+\DoxyCodeLine{26   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa8e42b79fe4e4f438f8085528895cca69}{T\_VECTOR}},}
+\DoxyCodeLine{27   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa2b93aac4bda1ecc9cd242c671411c323}{T\_STRING}},}
+\DoxyCodeLine{28   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faf421b698d0ecdb4793bcfcbff3f5d985}{T\_PTR}}}
+\DoxyCodeLine{29 \} \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\_type}};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{class_type_val}{TypeVal}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34   \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\_type}} \mbox{\hyperlink{class_type_val_abd5dd71d2a5e2ce2f3b1f018068108ff}{type}};}
+\DoxyCodeLine{35   std::variant<int, size\_t, double, std::vector<double>, std::string, \textcolor{keywordtype}{void} *> \mbox{\hyperlink{class_type_val_a2e22fc9eee9208b0fb3361374db7646e}{Val}};}
+\DoxyCodeLine{36   \mbox{\hyperlink{class_type_val_a584555ce9b88dfa20ab05d15980dcaf9}{TypeVal}}();}
+\DoxyCodeLine{37   \mbox{\hyperlink{class_type_val_a584555ce9b88dfa20ab05d15980dcaf9}{TypeVal}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_type_val}{TypeVal}} \&);}
+\DoxyCodeLine{38   \textcolor{comment}{// Be sure not to delete anything because we rely on copy by address.}}
+\DoxyCodeLine{39   \mbox{\hyperlink{class_type_val_a99d6508946d07b5a4cc7b2419c838445}{\string~TypeVal}}();}
+\DoxyCodeLine{40   \mbox{\hyperlink{class_type_val}{TypeVal}}\& \mbox{\hyperlink{class_type_val_a001121d22f62c3c895760f23691666e6}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_type_val}{TypeVal}} \&v);}
+\DoxyCodeLine{41   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_type_val_ab217758fd6d9be7188642ae5c8d0229a}{print}}(\textcolor{keyword}{const} std::string \&s) \textcolor{keyword}{const};}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{struct }\mbox{\hyperlink{structcomp}{comp}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46   \textcolor{keywordtype}{bool} \mbox{\hyperlink{structcomp_ad829488fc0ac43144e1a4a69fac469fe}{operator() }}(\textcolor{keyword}{const} std::string\& lhs, \textcolor{keyword}{const} std::string\& rhs)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{47     std::string::const\_iterator first1 = lhs.begin();}
+\DoxyCodeLine{48     std::string::const\_iterator first2 = rhs.begin();}
+\DoxyCodeLine{49     std::string::const\_iterator last1 = lhs.end();}
+\DoxyCodeLine{50     std::string::const\_iterator last2 = rhs.end();}
+\DoxyCodeLine{51     \textcolor{keywordflow}{for} ( ; (first1 != last1) \&\& (first2 != last2); ++first1, (void) ++first2 ) \{}
+\DoxyCodeLine{52       \textcolor{keywordtype}{char} a = std::tolower(*first1);}
+\DoxyCodeLine{53       \textcolor{keywordtype}{char} b = std::tolower(*first2);}
+\DoxyCodeLine{54       \textcolor{keywordflow}{if} (a < b) \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{55       \textcolor{keywordflow}{if} (b < a) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57     \textcolor{keywordflow}{return} (first1 == last1) \&\& (first2 != last2);}
+\DoxyCodeLine{58   \}}
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{typedef} std::map<std::string, TypeVal, comp> \mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{class }\mbox{\hyperlink{class_param}{Param}}}
+\DoxyCodeLine{65 \{}
+\DoxyCodeLine{66 \textcolor{keyword}{public}:}
+\DoxyCodeLine{67   \mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}} \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}};}
+\DoxyCodeLine{68   \mbox{\hyperlink{class_param_ae0eeef2ab32df12ccc4e9d2174d6e91a}{Param}}() \{ \}}
+\DoxyCodeLine{69   \mbox{\hyperlink{class_param_ae0eeef2ab32df12ccc4e9d2174d6e91a}{Param}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_param}{Param}}\&);}
+\DoxyCodeLine{70   \mbox{\hyperlink{class_param_a63814ed15af3910f8899dbd6853a7e05}{\string~Param}}();}
+\DoxyCodeLine{71   \mbox{\hyperlink{class_param}{Param}}\& \mbox{\hyperlink{class_param_a4379b839d0232f2be88cb0f0ea22e764}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_param}{Param}} \&P);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_param_a368f96b01a394e8d1fc5d0b1372dfc98}{extract}}(\textcolor{keyword}{const} std::string \&key, T \&out, \textcolor{keywordtype}{bool} go\_on = \textcolor{keyword}{false})\textcolor{keyword}{ const}}
+\DoxyCodeLine{75 \textcolor{keyword}{  }\{}
+\DoxyCodeLine{76     \textcolor{keyword}{static\_assert}(!std::is\_same<PnlVect*, T>(), \textcolor{stringliteral}{"{}Use the specialized version."{}});}
+\DoxyCodeLine{77     Hash::const\_iterator it;}
+\DoxyCodeLine{78     \textcolor{keywordflow}{if} (check\_if\_key(it, key) == \textcolor{keyword}{false})}
+\DoxyCodeLine{79       \{}
+\DoxyCodeLine{80         \textcolor{keywordflow}{if} (!go\_on)}
+\DoxyCodeLine{81           \{}
+\DoxyCodeLine{82             std::cout << \textcolor{stringliteral}{"{}Key "{}} << key << \textcolor{stringliteral}{"{} not found."{}} << std::endl;}
+\DoxyCodeLine{83             abort();}
+\DoxyCodeLine{84           \}}
+\DoxyCodeLine{85         \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{86       \}}
+\DoxyCodeLine{87     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{88       \{}
+\DoxyCodeLine{89         out = std::get<T>(it-\/>second.Val);}
+\DoxyCodeLine{90         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{91       \}}
+\DoxyCodeLine{92     \textcolor{keywordflow}{catch} (std::bad\_variant\_access e)}
+\DoxyCodeLine{93       \{}
+\DoxyCodeLine{94         std::cout << \textcolor{stringliteral}{"{}bad get for "{}} << key << std::endl;}
+\DoxyCodeLine{95         abort();}
+\DoxyCodeLine{96       \}}
+\DoxyCodeLine{97   \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_param_a368f96b01a394e8d1fc5d0b1372dfc98}{extract}}(\textcolor{keyword}{const} std::string \&key, PnlVect  *\&out, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{bool} go\_on = \textcolor{keyword}{false}) \textcolor{keyword}{const};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_param_a6e7845fcfd27605274ea017b27122344}{set}}(\textcolor{keyword}{const} std::string \&key, \textcolor{keyword}{const} T \&in)}
+\DoxyCodeLine{102   \{}
+\DoxyCodeLine{103     Hash::iterator it;}
+\DoxyCodeLine{104     \textcolor{keywordflow}{if} ((it = \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.find(key)) == \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.end()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{105     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{106       \{}
+\DoxyCodeLine{107         std::get<T>(it-\/>second.Val) = in;}
+\DoxyCodeLine{108         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{109       \}}
+\DoxyCodeLine{110     \textcolor{keywordflow}{catch} (std::bad\_variant\_access e)}
+\DoxyCodeLine{111       \{}
+\DoxyCodeLine{112         std::cout << \textcolor{stringliteral}{"{}bad get for "{}} << key << std::endl;}
+\DoxyCodeLine{113         abort();}
+\DoxyCodeLine{114       \}}
+\DoxyCodeLine{115   \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{125   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{class_param_a2d37d55e8112a67ac0fdbd719b141837}{insert}}(\textcolor{keyword}{const} std::string \&key, \textcolor{keyword}{const} \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\_type}} \&t, \textcolor{keyword}{const} T \&in)}
+\DoxyCodeLine{126   \{}
+\DoxyCodeLine{127     \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.find(key) != \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.end())}
+\DoxyCodeLine{128       \{}
+\DoxyCodeLine{129         set<T>(key, in);}
+\DoxyCodeLine{130         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{131       \}}
+\DoxyCodeLine{132     \mbox{\hyperlink{class_type_val}{TypeVal}} V;}
+\DoxyCodeLine{133     V.\mbox{\hyperlink{class_type_val_abd5dd71d2a5e2ce2f3b1f018068108ff}{type}} = t;}
+\DoxyCodeLine{134     V.\mbox{\hyperlink{class_type_val_a2e22fc9eee9208b0fb3361374db7646e}{Val}} = in;}
+\DoxyCodeLine{135     \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}[key] = V;}
+\DoxyCodeLine{136   \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_param_afba519467b2f8b6ff10bec66c077e298}{print}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{139 \textcolor{keyword}{  }\{}
+\DoxyCodeLine{140     Hash::const\_iterator it;}
+\DoxyCodeLine{141     \textcolor{keywordflow}{for} (it = \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.begin() ; it != \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}.end() ; it++) it-\/>second.print(it-\/>first);}
+\DoxyCodeLine{142   \}}
+\DoxyCodeLine{143 \textcolor{keyword}{private}:}
+\DoxyCodeLine{144   \textcolor{keywordtype}{bool} check\_if\_key(Hash::const\_iterator \&it, \textcolor{keyword}{const} std::string \&key) \textcolor{keyword}{const};}
+\DoxyCodeLine{145 \};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{keyword}{class }\mbox{\hyperlink{class_parser}{Parser}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_param}{Param}}}
+\DoxyCodeLine{148 \{}
+\DoxyCodeLine{149 \textcolor{keyword}{public}:}
+\DoxyCodeLine{150   \mbox{\hyperlink{class_parser_a12234f6cd36b61af4b50c94a179422c1}{Parser}}();}
+\DoxyCodeLine{151   \mbox{\hyperlink{class_parser_a12234f6cd36b61af4b50c94a179422c1}{Parser}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *InputFile);}
+\DoxyCodeLine{152   \mbox{\hyperlink{class_parser_a3e658b5917a93a3ef648050d060e3a93}{\string~Parser}}();}
+\DoxyCodeLine{153   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parser_ae7099218e09ec122508491630f5f6ca0}{add}}(\textcolor{keywordtype}{char} RedLine[]);}
+\DoxyCodeLine{154 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155   \textcolor{keywordtype}{void} ReadInputFile(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *InputFile);}
+\DoxyCodeLine{156   \textcolor{keywordtype}{char} type\_ldelim;}
+\DoxyCodeLine{157   \textcolor{keywordtype}{char} type\_rdelim;}
+\DoxyCodeLine{158 \};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

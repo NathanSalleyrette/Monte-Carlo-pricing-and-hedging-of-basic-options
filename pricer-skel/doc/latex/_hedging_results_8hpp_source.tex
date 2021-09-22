@@ -1,0 +1,46 @@
+\hypertarget{_hedging_results_8hpp_source}{}\doxysection{Hedging\+Results.\+hpp}
+\label{_hedging_results_8hpp_source}\index{src/HedgingResults.hpp@{src/HedgingResults.hpp}}
+\mbox{\hyperlink{_hedging_results_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{class }\mbox{\hyperlink{class_hedging_results}{HedgingResults}}}
+\DoxyCodeLine{5 \{}
+\DoxyCodeLine{6 \textcolor{keyword}{private}:}
+\DoxyCodeLine{7     \textcolor{keywordtype}{double} initialPrice;}
+\DoxyCodeLine{8     \textcolor{keywordtype}{double} initialPriceStdDev;}
+\DoxyCodeLine{9     \textcolor{keywordtype}{double} finalPnL;}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_hedging_results_a88c733d04a6c423d63487b54df1e2a1c}{HedgingResults}}(\textcolor{keywordtype}{double} initialPrice, \textcolor{keywordtype}{double} initialPriceStdDev, \textcolor{keywordtype}{double} finalPnL)}
+\DoxyCodeLine{13         : initialPrice(initialPrice)}
+\DoxyCodeLine{14         , initialPriceStdDev(initialPriceStdDev)}
+\DoxyCodeLine{15         , finalPnL(finalPnL)}
+\DoxyCodeLine{16     \{\}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \mbox{\hyperlink{class_hedging_results_a03b11209139b9f23f9722783a6222423}{HedgingResults}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_hedging_results}{HedgingResults}} \&hr)}
+\DoxyCodeLine{19         : initialPrice(hr.initialPrice)}
+\DoxyCodeLine{20         , initialPriceStdDev(hr.initialPriceStdDev)}
+\DoxyCodeLine{21         , finalPnL(hr.finalPnL)}
+\DoxyCodeLine{22     \{\}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_hedging_results_aac0b952c0dcb16f167b314b1822f61ff}{InitialPrice}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{25 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{26         \textcolor{keywordflow}{return} initialPrice;}
+\DoxyCodeLine{27     \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_hedging_results_a9721c86362dce6aa6e9c974f1924ce82}{InitialPriceStdDev}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{30 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} initialPriceStdDev;}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_hedging_results_a60e0cd4bc887f841ef0e049e75a5b6c1}{FinalPnL}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{35 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{36         \textcolor{keywordflow}{return} finalPnL;}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{friend} std::ostream \&\mbox{\hyperlink{class_hedging_results_a5ca2c33f589dd90c85dd0b95cf60f045}{operator<<}}(std::ostream \&stm, \textcolor{keyword}{const} \mbox{\hyperlink{class_hedging_results}{HedgingResults}} \&res);}
+\DoxyCodeLine{40 \};}
+
+\end{DoxyCode}

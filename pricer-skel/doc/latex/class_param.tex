@@ -1,0 +1,143 @@
+\hypertarget{class_param}{}\doxysection{Param Class Reference}
+\label{class_param}\index{Param@{Param}}
+
+
+{\ttfamily \#include $<$parser.\+hpp$>$}
+
+
+
+Inherited by \mbox{\hyperlink{class_parser}{Parser}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_param_ae0eeef2ab32df12ccc4e9d2174d6e91a}{Param}} ()
+\item 
+\mbox{\hyperlink{class_param_a37fea09e1a1e9b563d9a99ae07651cfc}{Param}} (const \mbox{\hyperlink{class_param}{Param}} \&)
+\item 
+\mbox{\hyperlink{class_param_a63814ed15af3910f8899dbd6853a7e05}{$\sim$\+Param}} ()
+\item 
+\mbox{\hyperlink{class_param}{Param}} \& \mbox{\hyperlink{class_param_a4379b839d0232f2be88cb0f0ea22e764}{operator=}} (const \mbox{\hyperlink{class_param}{Param}} \&P)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{class_param_a368f96b01a394e8d1fc5d0b1372dfc98}{extract}} (const std\+::string \&key, T \&out, bool go\+\_\+on=false) const
+\item 
+bool \mbox{\hyperlink{class_param_a1e5cbea74c6c4ca22acd37cbf02165b8}{extract}} (const std\+::string \&key, Pnl\+Vect $\ast$\&out, int size, bool go\+\_\+on=false) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{class_param_a6e7845fcfd27605274ea017b27122344}{set}} (const std\+::string \&key, const T \&in)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_param_a2d37d55e8112a67ac0fdbd719b141837}{insert}} (const std\+::string \&key, const \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\+\_\+type}} \&t, const T \&in)
+\item 
+void \mbox{\hyperlink{class_param_afba519467b2f8b6ff10bec66c077e298}{print}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}} \mbox{\hyperlink{class_param_ab671c1688f5247604d23ed990c90fd36}{M}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_param_ae0eeef2ab32df12ccc4e9d2174d6e91a}\label{class_param_ae0eeef2ab32df12ccc4e9d2174d6e91a}} 
+\index{Param@{Param}!Param@{Param}}
+\index{Param@{Param}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{Param()}{Param()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Param\+::\+Param (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_param_a37fea09e1a1e9b563d9a99ae07651cfc}\label{class_param_a37fea09e1a1e9b563d9a99ae07651cfc}} 
+\index{Param@{Param}!Param@{Param}}
+\index{Param@{Param}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{Param()}{Param()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Param\+::\+Param (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_param}{Param}} \&}]{P }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_param_a63814ed15af3910f8899dbd6853a7e05}\label{class_param_a63814ed15af3910f8899dbd6853a7e05}} 
+\index{Param@{Param}!````~Param@{$\sim$Param}}
+\index{````~Param@{$\sim$Param}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{$\sim$Param()}{~Param()}}
+{\footnotesize\ttfamily Param\+::$\sim$\+Param (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_param_a1e5cbea74c6c4ca22acd37cbf02165b8}\label{class_param_a1e5cbea74c6c4ca22acd37cbf02165b8}} 
+\index{Param@{Param}!extract@{extract}}
+\index{extract@{extract}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{extract()}{extract()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Param\+::extract (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{Pnl\+Vect $\ast$\&}]{out,  }\item[{int}]{size,  }\item[{bool}]{go\+\_\+on = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+Set out according to P
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the key to be looked for in the map \\
+\hline
+{\em out} & (output) set to the value associated to key in the map \\
+\hline
+{\em size} & size of the vector to be stored \\
+\hline
+{\em go\+\_\+on} & a boolean, if false and key is not found in the map, the abort function is called \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_param_a368f96b01a394e8d1fc5d0b1372dfc98}\label{class_param_a368f96b01a394e8d1fc5d0b1372dfc98}} 
+\index{Param@{Param}!extract@{extract}}
+\index{extract@{extract}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{extract()}{extract()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool Param\+::extract (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{T \&}]{out,  }\item[{bool}]{go\+\_\+on = {\ttfamily false} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_param_a2d37d55e8112a67ac0fdbd719b141837}\label{class_param_a2d37d55e8112a67ac0fdbd719b141837}} 
+\index{Param@{Param}!insert@{insert}}
+\index{insert@{insert}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Param\+::insert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{const \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\+\_\+type}} \&}]{t,  }\item[{const T \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Insert a new pair in the map or set M\mbox{[}key\mbox{]} to the new value if the key already exists in the map
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the template type of the element to be inserted \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the key \\
+\hline
+{\em t} & the type of the elements as an integer \\
+\hline
+{\em in} & the element itself \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_param_a4379b839d0232f2be88cb0f0ea22e764}\label{class_param_a4379b839d0232f2be88cb0f0ea22e764}} 
+\index{Param@{Param}!operator=@{operator=}}
+\index{operator=@{operator=}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_param}{Param}} \& Param\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_param}{Param}} \&}]{P }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_param_afba519467b2f8b6ff10bec66c077e298}\label{class_param_afba519467b2f8b6ff10bec66c077e298}} 
+\index{Param@{Param}!print@{print}}
+\index{print@{print}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Param\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_param_a6e7845fcfd27605274ea017b27122344}\label{class_param_a6e7845fcfd27605274ea017b27122344}} 
+\index{Param@{Param}!set@{set}}
+\index{set@{set}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool Param\+::set (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{const T \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_param_ab671c1688f5247604d23ed990c90fd36}\label{class_param_ab671c1688f5247604d23ed990c90fd36}} 
+\index{Param@{Param}!M@{M}}
+\index{M@{M}!Param@{Param}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}} Param\+::M}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/3rdparty/jlparser/include/jlparser/\mbox{\hyperlink{parser_8hpp}{parser.\+hpp}}\item 
+src/3rdparty/jlparser/\mbox{\hyperlink{parser_8cpp}{parser.\+cpp}}\end{DoxyCompactItemize}

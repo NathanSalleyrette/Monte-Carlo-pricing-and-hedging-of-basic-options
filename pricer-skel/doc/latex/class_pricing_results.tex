@@ -1,0 +1,90 @@
+\hypertarget{class_pricing_results}{}\doxysection{Pricing\+Results Class Reference}
+\label{class_pricing_results}\index{PricingResults@{PricingResults}}
+
+
+{\ttfamily \#include $<$Pricing\+Results.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pricing_results_add0cdad758e7c190fbd27ef5003e9f27}{Pricing\+Results}} (double price, double price\+Std\+Dev, const Pnl\+Vect $\ast$const delta, const Pnl\+Vect $\ast$const delta\+Std\+Dev)
+\item 
+\mbox{\hyperlink{class_pricing_results_ad7c1fe2434432e468a52e15bff5548b1}{$\sim$\+Pricing\+Results}} ()
+\item 
+\mbox{\hyperlink{class_pricing_results_ad69a1ade54f16b703e72cea526138e0f}{Pricing\+Results}} (const \mbox{\hyperlink{class_pricing_results}{Pricing\+Results}} \&pr)
+\item 
+double \mbox{\hyperlink{class_pricing_results_a417eba13bef57ebf86f9a5892a4ea827}{Price}} () const
+\item 
+double \mbox{\hyperlink{class_pricing_results_af8eeec1b0c9c4255fb0e23f179f0c1b0}{Price\+Std\+Dev}} () const
+\item 
+const Pnl\+Vect $\ast$const \mbox{\hyperlink{class_pricing_results_acce8096864a159aa4b8c51508d22264d}{Delta}} () const
+\item 
+const Pnl\+Vect $\ast$const \mbox{\hyperlink{class_pricing_results_aa7a739195d26b2c94cf5c54f2d14c20c}{Delta\+Std\+Dev}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{class_pricing_results_aa4a40ce381ba595a95c12527d75082c8}{operator$<$$<$}} (std\+::ostream \&stm, const \mbox{\hyperlink{class_pricing_results}{Pricing\+Results}} \&res)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_pricing_results_add0cdad758e7c190fbd27ef5003e9f27}\label{class_pricing_results_add0cdad758e7c190fbd27ef5003e9f27}} 
+\index{PricingResults@{PricingResults}!PricingResults@{PricingResults}}
+\index{PricingResults@{PricingResults}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{PricingResults()}{PricingResults()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Pricing\+Results\+::\+Pricing\+Results (\begin{DoxyParamCaption}\item[{double}]{price,  }\item[{double}]{price\+Std\+Dev,  }\item[{const Pnl\+Vect $\ast$const}]{delta,  }\item[{const Pnl\+Vect $\ast$const}]{delta\+Std\+Dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pricing_results_ad7c1fe2434432e468a52e15bff5548b1}\label{class_pricing_results_ad7c1fe2434432e468a52e15bff5548b1}} 
+\index{PricingResults@{PricingResults}!````~PricingResults@{$\sim$PricingResults}}
+\index{````~PricingResults@{$\sim$PricingResults}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{$\sim$PricingResults()}{~PricingResults()}}
+{\footnotesize\ttfamily Pricing\+Results\+::$\sim$\+Pricing\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pricing_results_ad69a1ade54f16b703e72cea526138e0f}\label{class_pricing_results_ad69a1ade54f16b703e72cea526138e0f}} 
+\index{PricingResults@{PricingResults}!PricingResults@{PricingResults}}
+\index{PricingResults@{PricingResults}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{PricingResults()}{PricingResults()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Pricing\+Results\+::\+Pricing\+Results (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_pricing_results}{Pricing\+Results}} \&}]{pr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pricing_results_acce8096864a159aa4b8c51508d22264d}\label{class_pricing_results_acce8096864a159aa4b8c51508d22264d}} 
+\index{PricingResults@{PricingResults}!Delta@{Delta}}
+\index{Delta@{Delta}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{Delta()}{Delta()}}
+{\footnotesize\ttfamily const Pnl\+Vect $\ast$const Pricing\+Results\+::\+Delta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pricing_results_aa7a739195d26b2c94cf5c54f2d14c20c}\label{class_pricing_results_aa7a739195d26b2c94cf5c54f2d14c20c}} 
+\index{PricingResults@{PricingResults}!DeltaStdDev@{DeltaStdDev}}
+\index{DeltaStdDev@{DeltaStdDev}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{DeltaStdDev()}{DeltaStdDev()}}
+{\footnotesize\ttfamily const Pnl\+Vect $\ast$const Pricing\+Results\+::\+Delta\+Std\+Dev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pricing_results_a417eba13bef57ebf86f9a5892a4ea827}\label{class_pricing_results_a417eba13bef57ebf86f9a5892a4ea827}} 
+\index{PricingResults@{PricingResults}!Price@{Price}}
+\index{Price@{Price}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{Price()}{Price()}}
+{\footnotesize\ttfamily double Pricing\+Results\+::\+Price (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pricing_results_af8eeec1b0c9c4255fb0e23f179f0c1b0}\label{class_pricing_results_af8eeec1b0c9c4255fb0e23f179f0c1b0}} 
+\index{PricingResults@{PricingResults}!PriceStdDev@{PriceStdDev}}
+\index{PriceStdDev@{PriceStdDev}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{PriceStdDev()}{PriceStdDev()}}
+{\footnotesize\ttfamily double Pricing\+Results\+::\+Price\+Std\+Dev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_pricing_results_aa4a40ce381ba595a95c12527d75082c8}\label{class_pricing_results_aa4a40ce381ba595a95c12527d75082c8}} 
+\index{PricingResults@{PricingResults}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!PricingResults@{PricingResults}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stm,  }\item[{const \mbox{\hyperlink{class_pricing_results}{Pricing\+Results}} \&}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_pricing_results_8hpp}{Pricing\+Results.\+hpp}}\end{DoxyCompactItemize}

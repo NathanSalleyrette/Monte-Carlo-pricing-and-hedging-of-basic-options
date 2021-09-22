@@ -1,0 +1,247 @@
+\hypertarget{class_black_scholes_model}{}\doxysection{Black\+Scholes\+Model Class Reference}
+\label{class_black_scholes_model}\index{BlackScholesModel@{BlackScholesModel}}
+
+
+Modèle de Black Scholes.  
+
+
+
+
+{\ttfamily \#include $<$Black\+Scholes\+Model.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_black_scholes_model_a0333237eae34a4b194edf667e8456033}{Black\+Scholes\+Model}} (int \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\+\_\+}}, double \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\+\_\+}}, double \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\+\_\+}}, Pnl\+Vect $\ast$\mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\+\_\+}}, Pnl\+Vect $\ast$\mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\+\_\+}})
+\item 
+\mbox{\hyperlink{class_black_scholes_model_a1f273e39d33b27280f87004c1480635b}{$\sim$\+Black\+Scholes\+Model}} ()
+\item 
+\mbox{\hyperlink{class_black_scholes_model_a67d57f080026044b9128d22aec79fc00}{Black\+Scholes\+Model}} (const \mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}} \&\mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}})
+\item 
+void \mbox{\hyperlink{class_black_scholes_model_a71ed54a0ca9a89b87610ff699814e120}{asset}} (Pnl\+Mat $\ast$path, double T, int nb\+Time\+Steps, Pnl\+Rng $\ast$rng)
+\item 
+void \mbox{\hyperlink{class_black_scholes_model_a4ae6f779b9f22255640241e1ed37fbe1}{asset}} (Pnl\+Mat $\ast$path, double t, double T, int nb\+Time\+Steps, Pnl\+Rng $\ast$rng, const Pnl\+Mat $\ast$past)
+\item 
+void \mbox{\hyperlink{class_black_scholes_model_ac89a165e6d27cc12dd77627597f7f56d}{shift\+Asset}} (Pnl\+Mat $\ast$shift\+\_\+path, const Pnl\+Mat $\ast$path, int d, double h, double t, double timestep)
+\item 
+void \mbox{\hyperlink{class_black_scholes_model_a6beab6d8abeab591914d05d4a22683b9}{simul\+\_\+market}} (Pnl\+Mat $\ast$path, double T, int nb\+Time\+Steps, Pnl\+Rng $\ast$rng)
+\item 
+void \mbox{\hyperlink{class_black_scholes_model_a64179e8d69d91315909606966f1b0f7f}{set\+Trend}} (double trend)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\+\_\+}}
+\item 
+double \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\+\_\+}}
+\begin{DoxyCompactList}\small\item\em nombre d\textquotesingle{}actifs du modèle \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\+\_\+}}
+\begin{DoxyCompactList}\small\item\em taux d\textquotesingle{}intérêt \end{DoxyCompactList}\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\+\_\+}}
+\begin{DoxyCompactList}\small\item\em paramètre de corrélation \end{DoxyCompactList}\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\+\_\+}}
+\begin{DoxyCompactList}\small\item\em vecteur de volatilités \end{DoxyCompactList}\item 
+Pnl\+Mat $\ast$ \mbox{\hyperlink{class_black_scholes_model_ae2fdf545dea29c53610b5920220e157d}{El}}
+\begin{DoxyCompactList}\small\item\em valeurs initiales des sous-\/jacents \end{DoxyCompactList}\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_black_scholes_model_ae9f3f4eba4e28575e418119403257403}{Lign\+El}}
+\begin{DoxyCompactList}\small\item\em Matrice triangulaire inférieure. \end{DoxyCompactList}\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_black_scholes_model_a7a8692c6ddafba22cf274a0cf1bde1d6}{Trend}}
+\begin{DoxyCompactList}\small\item\em Ligne de El. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Modèle de Black Scholes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_black_scholes_model_a0333237eae34a4b194edf667e8456033}\label{class_black_scholes_model_a0333237eae34a4b194edf667e8456033}} 
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{BlackScholesModel()}{BlackScholesModel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Black\+Scholes\+Model\+::\+Black\+Scholes\+Model (\begin{DoxyParamCaption}\item[{int}]{size\+\_\+,  }\item[{double}]{r\+\_\+,  }\item[{double}]{rho\+\_\+,  }\item[{Pnl\+Vect $\ast$}]{sigma\+\_\+,  }\item[{Pnl\+Vect $\ast$}]{spot\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_black_scholes_model_a1f273e39d33b27280f87004c1480635b}\label{class_black_scholes_model_a1f273e39d33b27280f87004c1480635b}} 
+\index{BlackScholesModel@{BlackScholesModel}!````~BlackScholesModel@{$\sim$BlackScholesModel}}
+\index{````~BlackScholesModel@{$\sim$BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{$\sim$BlackScholesModel()}{~BlackScholesModel()}}
+{\footnotesize\ttfamily Black\+Scholes\+Model\+::$\sim$\+Black\+Scholes\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_black_scholes_model_a67d57f080026044b9128d22aec79fc00}\label{class_black_scholes_model_a67d57f080026044b9128d22aec79fc00}} 
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\index{BlackScholesModel@{BlackScholesModel}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{BlackScholesModel()}{BlackScholesModel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Black\+Scholes\+Model\+::\+Black\+Scholes\+Model (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}} \&}]{Black\+Scholes\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_black_scholes_model_a4ae6f779b9f22255640241e1ed37fbe1}\label{class_black_scholes_model_a4ae6f779b9f22255640241e1ed37fbe1}} 
+\index{BlackScholesModel@{BlackScholesModel}!asset@{asset}}
+\index{asset@{asset}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{asset()}{asset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Black\+Scholes\+Model\+::asset (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$}]{path,  }\item[{double}]{t,  }\item[{double}]{T,  }\item[{int}]{nb\+Time\+Steps,  }\item[{Pnl\+Rng $\ast$}]{rng,  }\item[{const Pnl\+Mat $\ast$}]{past }\end{DoxyParamCaption})}
+
+Calcule une trajectoire du modèle connaissant le passé jusqu\textquotesingle{} à la date t
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em path} & contient une trajectoire du sous-\/jacent donnée jusqu\textquotesingle{}à l\textquotesingle{}instant t par la matrice past \\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & date jusqu\textquotesingle{}à laquelle on connait la trajectoire. t n\textquotesingle{}est pas forcément une date de discrétisation \\
+\hline
+\mbox{\texttt{ in}}  & {\em nb\+Time\+Steps} & nombre de pas de constatation \\
+\hline
+\mbox{\texttt{ in}}  & {\em T} & date jusqu\textquotesingle{}à laquelle on simule la trajectoire \\
+\hline
+\mbox{\texttt{ in}}  & {\em past} & trajectoire réalisée jusqu\textquotesingle{}a la date t \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_black_scholes_model_a71ed54a0ca9a89b87610ff699814e120}\label{class_black_scholes_model_a71ed54a0ca9a89b87610ff699814e120}} 
+\index{BlackScholesModel@{BlackScholesModel}!asset@{asset}}
+\index{asset@{asset}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{asset()}{asset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Black\+Scholes\+Model\+::asset (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$}]{path,  }\item[{double}]{T,  }\item[{int}]{nb\+Time\+Steps,  }\item[{Pnl\+Rng $\ast$}]{rng }\end{DoxyParamCaption})}
+
+Génère une trajectoire du modèle et la stocke dans path
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em path} & contient une trajectoire du modèle. C\textquotesingle{}est une matrice de taille (nb\+Time\+Steps+1) x d \\
+\hline
+\mbox{\texttt{ in}}  & {\em T} & maturité \\
+\hline
+\mbox{\texttt{ in}}  & {\em nb\+Time\+Steps} & nombre de dates de constatation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_black_scholes_model_a64179e8d69d91315909606966f1b0f7f}\label{class_black_scholes_model_a64179e8d69d91315909606966f1b0f7f}} 
+\index{BlackScholesModel@{BlackScholesModel}!setTrend@{setTrend}}
+\index{setTrend@{setTrend}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{setTrend()}{setTrend()}}
+{\footnotesize\ttfamily void Black\+Scholes\+Model\+::set\+Trend (\begin{DoxyParamCaption}\item[{double}]{trend }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_black_scholes_model_ac89a165e6d27cc12dd77627597f7f56d}\label{class_black_scholes_model_ac89a165e6d27cc12dd77627597f7f56d}} 
+\index{BlackScholesModel@{BlackScholesModel}!shiftAsset@{shiftAsset}}
+\index{shiftAsset@{shiftAsset}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{shiftAsset()}{shiftAsset()}}
+{\footnotesize\ttfamily void Black\+Scholes\+Model\+::shift\+Asset (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$}]{shift\+\_\+path,  }\item[{const Pnl\+Mat $\ast$}]{path,  }\item[{int}]{d,  }\item[{double}]{h,  }\item[{double}]{t,  }\item[{double}]{timestep }\end{DoxyParamCaption})}
+
+Shift d\textquotesingle{}une trajectoire du sous-\/jacent
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em path} & contient en input la trajectoire du sous-\/jacent \\
+\hline
+\mbox{\texttt{ out}}  & {\em shift\+\_\+path} & contient la trajectoire path dont la composante d a été shiftée par (1+h) à partir de la date t. \\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & date à partir de laquelle on shift \\
+\hline
+\mbox{\texttt{ in}}  & {\em h} & pas de différences finies \\
+\hline
+\mbox{\texttt{ in}}  & {\em d} & indice du sous-\/jacent à shifter \\
+\hline
+\mbox{\texttt{ in}}  & {\em timestep} & pas de constatation du sous-\/jacent \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_black_scholes_model_a6beab6d8abeab591914d05d4a22683b9}\label{class_black_scholes_model_a6beab6d8abeab591914d05d4a22683b9}} 
+\index{BlackScholesModel@{BlackScholesModel}!simul\_market@{simul\_market}}
+\index{simul\_market@{simul\_market}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{simul\_market()}{simul\_market()}}
+{\footnotesize\ttfamily void Black\+Scholes\+Model\+::simul\+\_\+market (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$}]{path,  }\item[{double}]{T,  }\item[{int}]{nb\+Time\+Steps,  }\item[{Pnl\+Rng $\ast$}]{rng }\end{DoxyParamCaption})}
+
+marché simulé sous la probabilité historique
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em contient} & la trajectoire simulée du sous-\/jacent \\
+\hline
+\mbox{\texttt{ in}}  & {\em T} & maturité de l\textquotesingle{}option \\
+\hline
+\mbox{\texttt{ in}}  & {\em nb\+Time\+Steps} & nombre de pas dans la trajectoire \\
+\hline
+\mbox{\texttt{ in}}  & {\em rng} & générateur \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_black_scholes_model_ae2fdf545dea29c53610b5920220e157d}\label{class_black_scholes_model_ae2fdf545dea29c53610b5920220e157d}} 
+\index{BlackScholesModel@{BlackScholesModel}!El@{El}}
+\index{El@{El}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{El}{El}}
+{\footnotesize\ttfamily Pnl\+Mat$\ast$ Black\+Scholes\+Model\+::\+El}
+
+
+
+valeurs initiales des sous-\/jacents 
+
+\mbox{\Hypertarget{class_black_scholes_model_ae9f3f4eba4e28575e418119403257403}\label{class_black_scholes_model_ae9f3f4eba4e28575e418119403257403}} 
+\index{BlackScholesModel@{BlackScholesModel}!LignEl@{LignEl}}
+\index{LignEl@{LignEl}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{LignEl}{LignEl}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Black\+Scholes\+Model\+::\+Lign\+El}
+
+
+
+Matrice triangulaire inférieure. 
+
+\mbox{\Hypertarget{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}\label{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}} 
+\index{BlackScholesModel@{BlackScholesModel}!r\_@{r\_}}
+\index{r\_@{r\_}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{r\_}{r\_}}
+{\footnotesize\ttfamily double Black\+Scholes\+Model\+::r\+\_\+}
+
+
+
+nombre d\textquotesingle{}actifs du modèle 
+
+\mbox{\Hypertarget{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}\label{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}} 
+\index{BlackScholesModel@{BlackScholesModel}!rho\_@{rho\_}}
+\index{rho\_@{rho\_}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{rho\_}{rho\_}}
+{\footnotesize\ttfamily double Black\+Scholes\+Model\+::rho\+\_\+}
+
+
+
+taux d\textquotesingle{}intérêt 
+
+\mbox{\Hypertarget{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}\label{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}} 
+\index{BlackScholesModel@{BlackScholesModel}!sigma\_@{sigma\_}}
+\index{sigma\_@{sigma\_}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{sigma\_}{sigma\_}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Black\+Scholes\+Model\+::sigma\+\_\+}
+
+
+
+paramètre de corrélation 
+
+\mbox{\Hypertarget{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}\label{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}} 
+\index{BlackScholesModel@{BlackScholesModel}!size\_@{size\_}}
+\index{size\_@{size\_}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily int Black\+Scholes\+Model\+::size\+\_\+}
+
+\mbox{\Hypertarget{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}\label{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}} 
+\index{BlackScholesModel@{BlackScholesModel}!spot\_@{spot\_}}
+\index{spot\_@{spot\_}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{spot\_}{spot\_}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Black\+Scholes\+Model\+::spot\+\_\+}
+
+
+
+vecteur de volatilités 
+
+\mbox{\Hypertarget{class_black_scholes_model_a7a8692c6ddafba22cf274a0cf1bde1d6}\label{class_black_scholes_model_a7a8692c6ddafba22cf274a0cf1bde1d6}} 
+\index{BlackScholesModel@{BlackScholesModel}!Trend@{Trend}}
+\index{Trend@{Trend}!BlackScholesModel@{BlackScholesModel}}
+\doxysubsubsection{\texorpdfstring{Trend}{Trend}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Black\+Scholes\+Model\+::\+Trend}
+
+
+
+Ligne de El. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_black_scholes_model_8hpp}{Black\+Scholes\+Model.\+hpp}}\item 
+src/\mbox{\hyperlink{_black_scholes_model_8cpp}{Black\+Scholes\+Model.\+cpp}}\end{DoxyCompactItemize}

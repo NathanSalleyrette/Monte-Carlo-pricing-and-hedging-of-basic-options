@@ -1,0 +1,33 @@
+\hypertarget{_option_asian_8hpp_source}{}\doxysection{Option\+Asian.\+hpp}
+\label{_option_asian_8hpp_source}\index{src/OptionAsian.hpp@{src/OptionAsian.hpp}}
+\mbox{\hyperlink{_option_asian_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}pnl/pnl\_vector.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}pnl/pnl\_matrix.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_option_8hpp}{Option.hpp}}"{}}}
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_option_asian}{OptionAsian}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_option}{Option}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8 \textcolor{keyword}{private}:}
+\DoxyCodeLine{9     \textcolor{keyword}{const} PnlVect *\textcolor{keyword}{const} weights;}
+\DoxyCodeLine{10     }
+\DoxyCodeLine{11     \textcolor{comment}{//string[] underlyingShares;}}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \mbox{\hyperlink{class_option_asian_ac52671f4493e7c839ce0b7115ec8e939}{OptionAsian}}(\textcolor{keywordtype}{double} \mbox{\hyperlink{class_option_a89f0365b68626cc5eb523f12159e0764}{T\_}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{class_option_ad424223ea2698144e823c494d625fbe0}{nbTimeSteps\_}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\_}}, \textcolor{keyword}{const} PnlVect *\textcolor{keyword}{const} weights, \textcolor{keywordtype}{double} \mbox{\hyperlink{class_option_a44d5a8d4c38ecd80145c0f1e5df50703}{strike}})}
+\DoxyCodeLine{15         :\mbox{\hyperlink{class_option}{Option}}(\mbox{\hyperlink{class_option_a89f0365b68626cc5eb523f12159e0764}{T\_}}, \mbox{\hyperlink{class_option_ad424223ea2698144e823c494d625fbe0}{nbTimeSteps\_}}, \mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\_}}, \mbox{\hyperlink{class_option_a44d5a8d4c38ecd80145c0f1e5df50703}{strike}}),}
+\DoxyCodeLine{16         weights(weights)}
+\DoxyCodeLine{17     \{ \}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \mbox{\hyperlink{class_option_asian_a190c133b4a1e5903c802b3b6b2d61a55}{\string~OptionAsian}}() \{ \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \mbox{\hyperlink{class_option_asian_ab893a4089302dac621c374ba54dbdb28}{OptionAsian}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_option_asian}{OptionAsian}} \&\mbox{\hyperlink{class_option_asian}{OptionAsian}})}
+\DoxyCodeLine{22         :\mbox{\hyperlink{class_option}{Option}}(\mbox{\hyperlink{class_option_asian}{OptionAsian}}.\mbox{\hyperlink{class_option_a89f0365b68626cc5eb523f12159e0764}{T\_}}, \mbox{\hyperlink{class_option_asian}{OptionAsian}}.\mbox{\hyperlink{class_option_ad424223ea2698144e823c494d625fbe0}{nbTimeSteps\_}}, \mbox{\hyperlink{class_option_asian}{OptionAsian}}.\mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\_}}, \mbox{\hyperlink{class_option_asian}{OptionAsian}}.\mbox{\hyperlink{class_option_a44d5a8d4c38ecd80145c0f1e5df50703}{strike}}),}
+\DoxyCodeLine{23         weights(\mbox{\hyperlink{class_option_asian}{OptionAsian}}.weights)}
+\DoxyCodeLine{24     \{ \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_option_asian_a82000eeaee192d4fae4a79d3d80dfd55}{payoff}}(\textcolor{keyword}{const} PnlMat *path) \textcolor{keyword}{override};}
+\DoxyCodeLine{27 \};}
+
+\end{DoxyCode}

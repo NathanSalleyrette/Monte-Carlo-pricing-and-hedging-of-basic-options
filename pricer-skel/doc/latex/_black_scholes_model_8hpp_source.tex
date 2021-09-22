@@ -1,0 +1,67 @@
+\hypertarget{_black_scholes_model_8hpp_source}{}\doxysection{Black\+Scholes\+Model.\+hpp}
+\label{_black_scholes_model_8hpp_source}\index{src/BlackScholesModel.hpp@{src/BlackScholesModel.hpp}}
+\mbox{\hyperlink{_black_scholes_model_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}pnl/pnl\_random.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}pnl/pnl\_vector.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}pnl/pnl\_matrix.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}; }
+\DoxyCodeLine{12     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}}; }
+\DoxyCodeLine{13     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}}; }
+\DoxyCodeLine{14     PnlVect *\mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}}; }
+\DoxyCodeLine{15     PnlVect *\mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}}; }
+\DoxyCodeLine{16     PnlMat *\mbox{\hyperlink{class_black_scholes_model_ae2fdf545dea29c53610b5920220e157d}{El}}; }
+\DoxyCodeLine{17     PnlVect *\mbox{\hyperlink{class_black_scholes_model_ae9f3f4eba4e28575e418119403257403}{LignEl}}; }
+\DoxyCodeLine{18     PnlVect *\mbox{\hyperlink{class_black_scholes_model_a7a8692c6ddafba22cf274a0cf1bde1d6}{Trend}};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \mbox{\hyperlink{class_black_scholes_model_a0333237eae34a4b194edf667e8456033}{BlackScholesModel}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}, \textcolor{keywordtype}{double} \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}}, \textcolor{keywordtype}{double} \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}},PnlVect *\mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}}, PnlVect *\mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}})}
+\DoxyCodeLine{21         : \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}(\mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}})}
+\DoxyCodeLine{22         , \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}}(\mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}})}
+\DoxyCodeLine{23         , \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}}(\mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}})}
+\DoxyCodeLine{24         , \mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}}(\mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}})}
+\DoxyCodeLine{25         , \mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}}(\mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}})}
+\DoxyCodeLine{26     \{ }
+\DoxyCodeLine{27         this-\/>El = pnl\_mat\_create\_from\_scalar(\mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}, \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}, \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}});}
+\DoxyCodeLine{28         this-\/>LignEl = pnl\_vect\_create(\mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}});}
+\DoxyCodeLine{29         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}; i++)\{}
+\DoxyCodeLine{30             pnl\_mat\_set\_diag(this-\/>El, 1.0, i);}
+\DoxyCodeLine{31         \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         pnl\_mat\_chol(this-\/>El);}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \mbox{\hyperlink{class_black_scholes_model_a1f273e39d33b27280f87004c1480635b}{\string~BlackScholesModel}}() \{ }
+\DoxyCodeLine{37         pnl\_mat\_free(\&\mbox{\hyperlink{class_black_scholes_model_ae2fdf545dea29c53610b5920220e157d}{El}});}
+\DoxyCodeLine{38         pnl\_vect\_free(\&\mbox{\hyperlink{class_black_scholes_model_ae9f3f4eba4e28575e418119403257403}{LignEl}});}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \mbox{\hyperlink{class_black_scholes_model_a67d57f080026044b9128d22aec79fc00}{BlackScholesModel}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}} \&\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}})}
+\DoxyCodeLine{42         : \mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}.\mbox{\hyperlink{class_black_scholes_model_ab84e9318c0c1e8a50d5e2f9a70f1256e}{size\_}})}
+\DoxyCodeLine{43         , \mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}.\mbox{\hyperlink{class_black_scholes_model_a9b07eb1d8a7ada20e1a723ba19172644}{r\_}})}
+\DoxyCodeLine{44         , \mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}.\mbox{\hyperlink{class_black_scholes_model_a1022a65929e3656f8990b7b0a63705ba}{rho\_}})}
+\DoxyCodeLine{45         , \mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}.\mbox{\hyperlink{class_black_scholes_model_a745a2d85da5056b44bd88f37ee7b33e0}{sigma\_}})}
+\DoxyCodeLine{46         , \mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}}.\mbox{\hyperlink{class_black_scholes_model_a6ce6853d5f0d65c8e0f07cdedca3e26a}{spot\_}})}
+\DoxyCodeLine{47     \{ \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_black_scholes_model_a71ed54a0ca9a89b87610ff699814e120}{asset}}(PnlMat *path, \textcolor{keywordtype}{double} T, \textcolor{keywordtype}{int} nbTimeSteps, PnlRng *rng);}
+\DoxyCodeLine{58     }
+\DoxyCodeLine{59 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_black_scholes_model_a71ed54a0ca9a89b87610ff699814e120}{asset}}(PnlMat *path, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} T, \textcolor{keywordtype}{int} nbTimeSteps, PnlRng *rng, \textcolor{keyword}{const} PnlMat *past);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_black_scholes_model_ac89a165e6d27cc12dd77627597f7f56d}{shiftAsset}}(PnlMat *shift\_path, \textcolor{keyword}{const} PnlMat *path, \textcolor{keywordtype}{int} d, \textcolor{keywordtype}{double} h, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} timestep);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_black_scholes_model_a6beab6d8abeab591914d05d4a22683b9}{simul\_market}}(PnlMat *path, \textcolor{keywordtype}{double} T, \textcolor{keywordtype}{int} nbTimeSteps, PnlRng *rng);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_black_scholes_model_a64179e8d69d91315909606966f1b0f7f}{setTrend}}(\textcolor{keywordtype}{double} trend);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 }
+
+\end{DoxyCode}

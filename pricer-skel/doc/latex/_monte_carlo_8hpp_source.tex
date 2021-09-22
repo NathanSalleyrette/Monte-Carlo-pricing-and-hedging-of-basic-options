@@ -1,0 +1,68 @@
+\hypertarget{_monte_carlo_8hpp_source}{}\doxysection{Monte\+Carlo.\+hpp}
+\label{_monte_carlo_8hpp_source}\index{src/MonteCarlo.hpp@{src/MonteCarlo.hpp}}
+\mbox{\hyperlink{_monte_carlo_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_option_8hpp}{Option.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_black_scholes_model_8hpp}{BlackScholesModel.hpp}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}pnl/pnl\_random.h"{}}}
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}} *\mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}; }
+\DoxyCodeLine{10     \mbox{\hyperlink{class_option}{Option}} *\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}; }
+\DoxyCodeLine{11     PnlRng *\mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}; }
+\DoxyCodeLine{12     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}; }
+\DoxyCodeLine{13     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}}; }
+\DoxyCodeLine{14     PnlVect *\mbox{\hyperlink{class_monte_carlo_a94226661f7c9f4f0fe2d5dd8a2b5957a}{sumShift}};}
+\DoxyCodeLine{15     PnlVect *\mbox{\hyperlink{class_monte_carlo_aad11c4f35759c1905f7cdb8bb0d10939}{sumShiftSquare}}; }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \mbox{\hyperlink{class_monte_carlo_a8c2a05613d692f1d8c22874bdb134fd1}{MonteCarlo}}(\mbox{\hyperlink{class_black_scholes_model}{BlackScholesModel}} *\mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}, \mbox{\hyperlink{class_option}{Option}} *\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}, PnlRng *\mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}, \textcolor{keywordtype}{double} \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}})}
+\DoxyCodeLine{19         : \mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}(\mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}),}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}(\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}),}
+\DoxyCodeLine{21         \mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}(\mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}),}
+\DoxyCodeLine{22         \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}(\mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}),}
+\DoxyCodeLine{23         \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}}(\mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}})}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         this-\/>sumShift = pnl\_vect\_create\_from\_zero(\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}-\/>\mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\_}});}
+\DoxyCodeLine{27         this-\/>sumShiftSquare = pnl\_vect\_create\_from\_zero(\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}-\/>\mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\_}});}
+\DoxyCodeLine{28     \}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \mbox{\hyperlink{class_monte_carlo_af53fc3a679af18b51a3002b4c1f6b6c2}{\string~MonteCarlo}}() \{}
+\DoxyCodeLine{31         pnl\_vect\_free(\&\mbox{\hyperlink{class_monte_carlo_a94226661f7c9f4f0fe2d5dd8a2b5957a}{sumShift}});}
+\DoxyCodeLine{32         pnl\_vect\_free(\&\mbox{\hyperlink{class_monte_carlo_aad11c4f35759c1905f7cdb8bb0d10939}{sumShiftSquare}});}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{34     }
+\DoxyCodeLine{35     \mbox{\hyperlink{class_monte_carlo_aafe32262697722e454399674b5167e92}{MonteCarlo}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_monte_carlo}{MonteCarlo}} \&\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}})}
+\DoxyCodeLine{36         : \mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}(\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}.\mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\_}}),}
+\DoxyCodeLine{37         \mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}(\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}.\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\_}}),}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}(\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}.\mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\_}}),}
+\DoxyCodeLine{39         \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}(\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}.\mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fdStep\_}}),}
+\DoxyCodeLine{40         \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}}(\mbox{\hyperlink{class_monte_carlo}{MonteCarlo}}.\mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nbSamples\_}})}
+\DoxyCodeLine{41     \{\}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}{price}}(\textcolor{keywordtype}{double} \&prix, \textcolor{keywordtype}{double} \&std\_dev);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}{price}}(\textcolor{keyword}{const} PnlMat *past, \textcolor{keywordtype}{double} t, \textcolor{keywordtype}{double} \&prix, \textcolor{keywordtype}{double} \&std\_dev);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}(\textcolor{keyword}{const} PnlMat *past, \textcolor{keywordtype}{double} t, PnlVect *\mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}, PnlVect *std\_dev);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}(PnlVect *\mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}, PnlVect *std\_dev);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 }
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_a98cc59c8cb73b69cf2997254ed1acdf0}{portfolioValue}}(PnlVect *\mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}, \textcolor{keywordtype}{double} \&value, \textcolor{keywordtype}{double} \&\mbox{\hyperlink{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}{price}});}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{98     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_a98cc59c8cb73b69cf2997254ed1acdf0}{portfolioValue}}(PnlVect *deltaNow, PnlVect *deltasLast, \textcolor{keywordtype}{double} \&value, \textcolor{keywordtype}{double} \&H, PnlVect *spots);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_monte_carlo_a08af687ca76ad70d3654722eaf739c82}{profitAndLoss}}(PnlMat *past, \textcolor{keywordtype}{double} \&error, \textcolor{keywordtype}{double} \&prix, \textcolor{keywordtype}{double} \&std\_dev);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 }
+
+\end{DoxyCode}

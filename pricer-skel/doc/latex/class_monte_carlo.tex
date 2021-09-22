@@ -1,0 +1,240 @@
+\hypertarget{class_monte_carlo}{}\doxysection{Monte\+Carlo Class Reference}
+\label{class_monte_carlo}\index{MonteCarlo@{MonteCarlo}}
+
+
+{\ttfamily \#include $<$Monte\+Carlo.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_monte_carlo_a8c2a05613d692f1d8c22874bdb134fd1}{Monte\+Carlo}} (\mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}} $\ast$\mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\+\_\+}}, \mbox{\hyperlink{class_option}{Option}} $\ast$\mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\+\_\+}}, Pnl\+Rng $\ast$\mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\+\_\+}}, double \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fd\+Step\+\_\+}}, int \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nb\+Samples\+\_\+}})
+\item 
+\mbox{\hyperlink{class_monte_carlo_af53fc3a679af18b51a3002b4c1f6b6c2}{$\sim$\+Monte\+Carlo}} ()
+\item 
+\mbox{\hyperlink{class_monte_carlo_aafe32262697722e454399674b5167e92}{Monte\+Carlo}} (const \mbox{\hyperlink{class_monte_carlo}{Monte\+Carlo}} \&\mbox{\hyperlink{class_monte_carlo}{Monte\+Carlo}})
+\item 
+void \mbox{\hyperlink{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}{price}} (double \&prix, double \&std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_monte_carlo_aa7ca062f96f794ba1b6a22e127e314dd}{price}} (const Pnl\+Mat $\ast$past, double t, double \&prix, double \&std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}} (const Pnl\+Mat $\ast$past, double t, Pnl\+Vect $\ast$delta, Pnl\+Vect $\ast$std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_monte_carlo_a58b61a5d3d037391888a32b201b349fd}{delta}} (Pnl\+Vect $\ast$delta, Pnl\+Vect $\ast$std\+\_\+dev)
+\item 
+void \mbox{\hyperlink{class_monte_carlo_a98cc59c8cb73b69cf2997254ed1acdf0}{portfolio\+Value}} (Pnl\+Vect $\ast$\mbox{\hyperlink{class_monte_carlo_a983413ab77b334df64765e9792de08bc}{delta}}, double \&value, double \&\mbox{\hyperlink{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}{price}})
+\item 
+void \mbox{\hyperlink{class_monte_carlo_a2af1054021d3fe58e1e800327c8f8025}{portfolio\+Value}} (Pnl\+Vect $\ast$delta\+Now, Pnl\+Vect $\ast$deltas\+Last, double \&value, double \&H, Pnl\+Vect $\ast$spots)
+\item 
+void \mbox{\hyperlink{class_monte_carlo_a08af687ca76ad70d3654722eaf739c82}{profit\+And\+Loss}} (Pnl\+Mat $\ast$past, double \&error, double \&prix, double \&std\+\_\+dev)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}} $\ast$ \mbox{\hyperlink{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}{mod\+\_\+}}
+\item 
+\mbox{\hyperlink{class_option}{Option}} $\ast$ \mbox{\hyperlink{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}{opt\+\_\+}}
+\item 
+Pnl\+Rng $\ast$ \mbox{\hyperlink{class_monte_carlo_aa41318b565311457e04383047d68936e}{rng\+\_\+}}
+\item 
+double \mbox{\hyperlink{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}{fd\+Step\+\_\+}}
+\item 
+int \mbox{\hyperlink{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}{nb\+Samples\+\_\+}}
+\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_monte_carlo_a94226661f7c9f4f0fe2d5dd8a2b5957a}{sum\+Shift}}
+\item 
+Pnl\+Vect $\ast$ \mbox{\hyperlink{class_monte_carlo_aad11c4f35759c1905f7cdb8bb0d10939}{sum\+Shift\+Square}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_monte_carlo_a8c2a05613d692f1d8c22874bdb134fd1}\label{class_monte_carlo_a8c2a05613d692f1d8c22874bdb134fd1}} 
+\index{MonteCarlo@{MonteCarlo}!MonteCarlo@{MonteCarlo}}
+\index{MonteCarlo@{MonteCarlo}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{MonteCarlo()}{MonteCarlo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Monte\+Carlo\+::\+Monte\+Carlo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}} $\ast$}]{mod\+\_\+,  }\item[{\mbox{\hyperlink{class_option}{Option}} $\ast$}]{opt\+\_\+,  }\item[{Pnl\+Rng $\ast$}]{rng\+\_\+,  }\item[{double}]{fd\+Step\+\_\+,  }\item[{int}]{nb\+Samples\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_monte_carlo_af53fc3a679af18b51a3002b4c1f6b6c2}\label{class_monte_carlo_af53fc3a679af18b51a3002b4c1f6b6c2}} 
+\index{MonteCarlo@{MonteCarlo}!````~MonteCarlo@{$\sim$MonteCarlo}}
+\index{````~MonteCarlo@{$\sim$MonteCarlo}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{$\sim$MonteCarlo()}{~MonteCarlo()}}
+{\footnotesize\ttfamily Monte\+Carlo\+::$\sim$\+Monte\+Carlo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_monte_carlo_aafe32262697722e454399674b5167e92}\label{class_monte_carlo_aafe32262697722e454399674b5167e92}} 
+\index{MonteCarlo@{MonteCarlo}!MonteCarlo@{MonteCarlo}}
+\index{MonteCarlo@{MonteCarlo}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{MonteCarlo()}{MonteCarlo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Monte\+Carlo\+::\+Monte\+Carlo (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_monte_carlo}{Monte\+Carlo}} \&}]{Monte\+Carlo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_monte_carlo_a983413ab77b334df64765e9792de08bc}\label{class_monte_carlo_a983413ab77b334df64765e9792de08bc}} 
+\index{MonteCarlo@{MonteCarlo}!delta@{delta}}
+\index{delta@{delta}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{delta()}{delta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::delta (\begin{DoxyParamCaption}\item[{const Pnl\+Mat $\ast$}]{past,  }\item[{double}]{t,  }\item[{Pnl\+Vect $\ast$}]{delta,  }\item[{Pnl\+Vect $\ast$}]{std\+\_\+dev }\end{DoxyParamCaption})}
+
+Calcule le delta de l\textquotesingle{}option à la date t
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em past} & contient la trajectoire du sous-\/jacent jusqu\textquotesingle{}à l\textquotesingle{}instant t \\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & date à laquelle le calcul est fait \\
+\hline
+\mbox{\texttt{ out}}  & {\em delta} & contient le vecteur de delta \\
+\hline
+\mbox{\texttt{ out}}  & {\em std\+\_\+dev} & contient l\textquotesingle{}écart type de l\textquotesingle{}estimateur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_a58b61a5d3d037391888a32b201b349fd}\label{class_monte_carlo_a58b61a5d3d037391888a32b201b349fd}} 
+\index{MonteCarlo@{MonteCarlo}!delta@{delta}}
+\index{delta@{delta}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{delta()}{delta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::delta (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$}]{delta,  }\item[{Pnl\+Vect $\ast$}]{std\+\_\+dev }\end{DoxyParamCaption})}
+
+Calcule le delta de l\textquotesingle{}option à la date 0
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em t} & date à laquelle le calcul est fait \\
+\hline
+\mbox{\texttt{ out}}  & {\em delta} & contient le vecteur de delta \\
+\hline
+\mbox{\texttt{ out}}  & {\em std\+\_\+dev} & contient l\textquotesingle{}écart type de l\textquotesingle{}estimateur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_a98cc59c8cb73b69cf2997254ed1acdf0}\label{class_monte_carlo_a98cc59c8cb73b69cf2997254ed1acdf0}} 
+\index{MonteCarlo@{MonteCarlo}!portfolioValue@{portfolioValue}}
+\index{portfolioValue@{portfolioValue}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{portfolioValue()}{portfolioValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::portfolio\+Value (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$}]{delta,  }\item[{double \&}]{value,  }\item[{double \&}]{price }\end{DoxyParamCaption})}
+
+Calcul du portefeuille de couverture à la date 0 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em delta} & contient le vecteur de delta en 0 \\
+\hline
+\mbox{\texttt{ out}}  & {\em value} & contient la valeur du portefeuille à la date 0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_a2af1054021d3fe58e1e800327c8f8025}\label{class_monte_carlo_a2af1054021d3fe58e1e800327c8f8025}} 
+\index{MonteCarlo@{MonteCarlo}!portfolioValue@{portfolioValue}}
+\index{portfolioValue@{portfolioValue}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{portfolioValue()}{portfolioValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::portfolio\+Value (\begin{DoxyParamCaption}\item[{Pnl\+Vect $\ast$}]{delta\+Now,  }\item[{Pnl\+Vect $\ast$}]{deltas\+Last,  }\item[{double \&}]{value,  }\item[{double \&}]{H,  }\item[{Pnl\+Vect $\ast$}]{spots }\end{DoxyParamCaption})}
+
+Calcul du portefeuille à une date t \texorpdfstring{$>$}{>} 0 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em delta\+Now} & contient le vecteur des delta pour la trajectoire de marché \\
+\hline
+\mbox{\texttt{ in}}  & {\em deltas\+Last} & contient un vecteur de delta pour le dernier temps \\
+\hline
+\mbox{\texttt{ out}}  & {\em value} & valeur du portefeuille à l\textquotesingle{}instant t \\
+\hline
+\mbox{\texttt{ in}}  & {\em H} & nombre de dates historiques \\
+\hline
+\mbox{\texttt{ in}}  & {\em spots} & Vecteur contenant les spots \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_aa7ca062f96f794ba1b6a22e127e314dd}\label{class_monte_carlo_aa7ca062f96f794ba1b6a22e127e314dd}} 
+\index{MonteCarlo@{MonteCarlo}!price@{price}}
+\index{price@{price}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{price()}{price()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::price (\begin{DoxyParamCaption}\item[{const Pnl\+Mat $\ast$}]{past,  }\item[{double}]{t,  }\item[{double \&}]{prix,  }\item[{double \&}]{std\+\_\+dev }\end{DoxyParamCaption})}
+
+Calcule le prix de l\textquotesingle{}option à la date t
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em past} & contient la trajectoire du sous-\/jacent jusqu\textquotesingle{}à l\textquotesingle{}instant t \\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & date à laquelle le calcul est fait \\
+\hline
+\mbox{\texttt{ out}}  & {\em prix} & contient le prix \\
+\hline
+\mbox{\texttt{ out}}  & {\em std\+\_\+dev} & contient l\textquotesingle{}écart type de l\textquotesingle{}estimateur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}\label{class_monte_carlo_aaea137980f6636b72f505a02f19f4605}} 
+\index{MonteCarlo@{MonteCarlo}!price@{price}}
+\index{price@{price}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{price()}{price()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::price (\begin{DoxyParamCaption}\item[{double \&}]{prix,  }\item[{double \&}]{std\+\_\+dev }\end{DoxyParamCaption})}
+
+Calcule le prix de l\textquotesingle{}option à la date 0
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em prix} & valeur de l\textquotesingle{}estimateur Monte Carlo \\
+\hline
+\mbox{\texttt{ out}}  & {\em ic} & écart type de l\textquotesingle{}estimateur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_monte_carlo_a08af687ca76ad70d3654722eaf739c82}\label{class_monte_carlo_a08af687ca76ad70d3654722eaf739c82}} 
+\index{MonteCarlo@{MonteCarlo}!profitAndLoss@{profitAndLoss}}
+\index{profitAndLoss@{profitAndLoss}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{profitAndLoss()}{profitAndLoss()}}
+{\footnotesize\ttfamily void Monte\+Carlo\+::profit\+And\+Loss (\begin{DoxyParamCaption}\item[{Pnl\+Mat $\ast$}]{past,  }\item[{double \&}]{error,  }\item[{double \&}]{prix,  }\item[{double \&}]{std\+\_\+dev }\end{DoxyParamCaption})}
+
+Calcul l\textquotesingle{}erreur de couverture 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em past} & contient la matrice avec les valeurs observées à chaque instant \\
+\hline
+\mbox{\texttt{ out}}  & {\em error} & erreur de couverture \\
+\hline
+\mbox{\texttt{ out}}  & {\em prix} & prix initial \\
+\hline
+\mbox{\texttt{ out}}  & {\em std\+\_\+dev} & standard deviation initiale \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}\label{class_monte_carlo_a87640dad0fffa3c38d70c8be6c8d61cb}} 
+\index{MonteCarlo@{MonteCarlo}!fdStep\_@{fdStep\_}}
+\index{fdStep\_@{fdStep\_}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{fdStep\_}{fdStep\_}}
+{\footnotesize\ttfamily double Monte\+Carlo\+::fd\+Step\+\_\+}
+
+pointeur sur le générateur \mbox{\Hypertarget{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}\label{class_monte_carlo_a704c29cd8aa027ab01cc556d37c9a764}} 
+\index{MonteCarlo@{MonteCarlo}!mod\_@{mod\_}}
+\index{mod\_@{mod\_}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{mod\_}{mod\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_black_scholes_model}{Black\+Scholes\+Model}}$\ast$ Monte\+Carlo\+::mod\+\_\+}
+
+\mbox{\Hypertarget{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}\label{class_monte_carlo_a82f5bfded3f8b62f22afaa50f7e73ffe}} 
+\index{MonteCarlo@{MonteCarlo}!nbSamples\_@{nbSamples\_}}
+\index{nbSamples\_@{nbSamples\_}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{nbSamples\_}{nbSamples\_}}
+{\footnotesize\ttfamily int Monte\+Carlo\+::nb\+Samples\+\_\+}
+
+pas de différence finie \mbox{\Hypertarget{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}\label{class_monte_carlo_af0ee580b0eb87f57c7a41cd2a9e6fc6a}} 
+\index{MonteCarlo@{MonteCarlo}!opt\_@{opt\_}}
+\index{opt\_@{opt\_}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{opt\_}{opt\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_option}{Option}}$\ast$ Monte\+Carlo\+::opt\+\_\+}
+
+pointeur vers le modèle \mbox{\Hypertarget{class_monte_carlo_aa41318b565311457e04383047d68936e}\label{class_monte_carlo_aa41318b565311457e04383047d68936e}} 
+\index{MonteCarlo@{MonteCarlo}!rng\_@{rng\_}}
+\index{rng\_@{rng\_}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{rng\_}{rng\_}}
+{\footnotesize\ttfamily Pnl\+Rng$\ast$ Monte\+Carlo\+::rng\+\_\+}
+
+pointeur sur l\textquotesingle{}option \mbox{\Hypertarget{class_monte_carlo_a94226661f7c9f4f0fe2d5dd8a2b5957a}\label{class_monte_carlo_a94226661f7c9f4f0fe2d5dd8a2b5957a}} 
+\index{MonteCarlo@{MonteCarlo}!sumShift@{sumShift}}
+\index{sumShift@{sumShift}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{sumShift}{sumShift}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Monte\+Carlo\+::sum\+Shift}
+
+nombre de tirages Monte Carlo \mbox{\Hypertarget{class_monte_carlo_aad11c4f35759c1905f7cdb8bb0d10939}\label{class_monte_carlo_aad11c4f35759c1905f7cdb8bb0d10939}} 
+\index{MonteCarlo@{MonteCarlo}!sumShiftSquare@{sumShiftSquare}}
+\index{sumShiftSquare@{sumShiftSquare}!MonteCarlo@{MonteCarlo}}
+\doxysubsubsection{\texorpdfstring{sumShiftSquare}{sumShiftSquare}}
+{\footnotesize\ttfamily Pnl\+Vect$\ast$ Monte\+Carlo\+::sum\+Shift\+Square}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_monte_carlo_8hpp}{Monte\+Carlo.\+hpp}}\item 
+src/\mbox{\hyperlink{_monte_carlo_8cpp}{Monte\+Carlo.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,104 @@
+\hypertarget{parser_8hpp}{}\doxysection{src/3rdparty/jlparser/include/jlparser/parser.hpp File Reference}
+\label{parser_8hpp}\index{src/3rdparty/jlparser/include/jlparser/parser.hpp@{src/3rdparty/jlparser/include/jlparser/parser.hpp}}
+{\ttfamily \#include \char`\"{}pnl/pnl\+\_\+matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+{\ttfamily \#include $<$variant$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_type_val}{Type\+Val}}
+\item 
+struct \mbox{\hyperlink{structcomp}{comp}}
+\item 
+class \mbox{\hyperlink{class_param}{Param}}
+\item 
+class \mbox{\hyperlink{class_parser}{Parser}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{parser_8hpp_a3bcbc3ff314d166a1887c5a4ea3e2d1b}{MAX\+\_\+\+CHAR\+\_\+\+LINE}}~1024
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::map$<$ std\+::string, \mbox{\hyperlink{class_type_val}{Type\+Val}}, \mbox{\hyperlink{structcomp}{comp}} $>$ \mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\+\_\+type}} \{ \newline
+\mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa26c5769a44ea25ffe1407c6a0bfdb862}{T\+\_\+\+NULL}}
+, \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faa30cbb0eb56b7263a35f9d6643e12c83}{T\+\_\+\+INT}}
+, \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa1f8887255ce9ce523e5c497f14d9d842}{T\+\_\+\+LONG}}
+, \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa875b555dccbb4f76c01f6d3b64cb23be}{T\+\_\+\+DOUBLE}}
+, \newline
+\mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa8e42b79fe4e4f438f8085528895cca69}{T\+\_\+\+VECTOR}}
+, \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa2b93aac4bda1ecc9cd242c671411c323}{T\+\_\+\+STRING}}
+, \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faf421b698d0ecdb4793bcfcbff3f5d985}{T\+\_\+\+PTR}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{parser_8hpp_a3bcbc3ff314d166a1887c5a4ea3e2d1b}\label{parser_8hpp_a3bcbc3ff314d166a1887c5a4ea3e2d1b}} 
+\index{parser.hpp@{parser.hpp}!MAX\_CHAR\_LINE@{MAX\_CHAR\_LINE}}
+\index{MAX\_CHAR\_LINE@{MAX\_CHAR\_LINE}!parser.hpp@{parser.hpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_CHAR\_LINE}{MAX\_CHAR\_LINE}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+CHAR\+\_\+\+LINE~1024}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}\label{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}} 
+\index{parser.hpp@{parser.hpp}!Hash@{Hash}}
+\index{Hash@{Hash}!parser.hpp@{parser.hpp}}
+\doxysubsubsection{\texorpdfstring{Hash}{Hash}}
+{\footnotesize\ttfamily typedef std\+::map$<$std\+::string, \mbox{\hyperlink{class_type_val}{Type\+Val}}, \mbox{\hyperlink{structcomp}{comp}}$>$ \mbox{\hyperlink{parser_8hpp_a77c3bfcf208503ef5164669afcd00ffe}{Hash}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}} 
+\index{parser.hpp@{parser.hpp}!T\_type@{T\_type}}
+\index{T\_type@{T\_type}!parser.hpp@{parser.hpp}}
+\doxysubsubsection{\texorpdfstring{T\_type}{T\_type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0f}{T\+\_\+type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_NULL@{T\_NULL}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_NULL@{T\_NULL}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa26c5769a44ea25ffe1407c6a0bfdb862}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa26c5769a44ea25ffe1407c6a0bfdb862}} 
+T\+\_\+\+NULL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_INT@{T\_INT}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_INT@{T\_INT}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faa30cbb0eb56b7263a35f9d6643e12c83}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faa30cbb0eb56b7263a35f9d6643e12c83}} 
+T\+\_\+\+INT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_LONG@{T\_LONG}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_LONG@{T\_LONG}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa1f8887255ce9ce523e5c497f14d9d842}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa1f8887255ce9ce523e5c497f14d9d842}} 
+T\+\_\+\+LONG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_DOUBLE@{T\_DOUBLE}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_DOUBLE@{T\_DOUBLE}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa875b555dccbb4f76c01f6d3b64cb23be}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa875b555dccbb4f76c01f6d3b64cb23be}} 
+T\+\_\+\+DOUBLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_VECTOR@{T\_VECTOR}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_VECTOR@{T\_VECTOR}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa8e42b79fe4e4f438f8085528895cca69}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa8e42b79fe4e4f438f8085528895cca69}} 
+T\+\_\+\+VECTOR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_STRING@{T\_STRING}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_STRING@{T\_STRING}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa2b93aac4bda1ecc9cd242c671411c323}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0fa2b93aac4bda1ecc9cd242c671411c323}} 
+T\+\_\+\+STRING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_PTR@{T\_PTR}!parser.hpp@{parser.hpp}}\index{parser.hpp@{parser.hpp}!T\_PTR@{T\_PTR}}}\mbox{\Hypertarget{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faf421b698d0ecdb4793bcfcbff3f5d985}\label{parser_8hpp_a90856b8fb3f1a65845ffec1ec2884c0faf421b698d0ecdb4793bcfcbff3f5d985}} 
+T\+\_\+\+PTR&\\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,72 @@
+\hypertarget{class_option_performance}{}\doxysection{Option\+Performance Class Reference}
+\label{class_option_performance}\index{OptionPerformance@{OptionPerformance}}
+
+
+{\ttfamily \#include $<$Option\+Performance.\+hpp$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_option}{Option}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_option_performance_ae0749b73478681ab54eaeadd90be9acf}{Option\+Performance}} (double \mbox{\hyperlink{class_option_a89f0365b68626cc5eb523f12159e0764}{T\+\_\+}}, int \mbox{\hyperlink{class_option_ad424223ea2698144e823c494d625fbe0}{nb\+Time\+Steps\+\_\+}}, int \mbox{\hyperlink{class_option_a65fae5103b50f953f29a86b1a17b4540}{size\+\_\+}}, const Pnl\+Vect $\ast$const weights, double \mbox{\hyperlink{class_option_a44d5a8d4c38ecd80145c0f1e5df50703}{strike}})
+\item 
+\mbox{\hyperlink{class_option_performance_a39eb347d786245d388e5ccd7c2cff224}{$\sim$\+Option\+Performance}} ()
+\item 
+\mbox{\hyperlink{class_option_performance_a209d505ba30f62c794dd43ef5beeaea7}{Option\+Performance}} (const \mbox{\hyperlink{class_option_performance}{Option\+Performance}} \&\mbox{\hyperlink{class_option_performance}{Option\+Performance}})
+\item 
+double \mbox{\hyperlink{class_option_performance_a8a932f86decbc05dfeb54fb18762b553}{payoff}} (const Pnl\+Mat $\ast$path) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_option_performance_ae0749b73478681ab54eaeadd90be9acf}\label{class_option_performance_ae0749b73478681ab54eaeadd90be9acf}} 
+\index{OptionPerformance@{OptionPerformance}!OptionPerformance@{OptionPerformance}}
+\index{OptionPerformance@{OptionPerformance}!OptionPerformance@{OptionPerformance}}
+\doxysubsubsection{\texorpdfstring{OptionPerformance()}{OptionPerformance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Option\+Performance\+::\+Option\+Performance (\begin{DoxyParamCaption}\item[{double}]{T\+\_\+,  }\item[{int}]{nb\+Time\+Steps\+\_\+,  }\item[{int}]{size\+\_\+,  }\item[{const Pnl\+Vect $\ast$const}]{weights,  }\item[{double}]{strike }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_option_performance_a39eb347d786245d388e5ccd7c2cff224}\label{class_option_performance_a39eb347d786245d388e5ccd7c2cff224}} 
+\index{OptionPerformance@{OptionPerformance}!````~OptionPerformance@{$\sim$OptionPerformance}}
+\index{````~OptionPerformance@{$\sim$OptionPerformance}!OptionPerformance@{OptionPerformance}}
+\doxysubsubsection{\texorpdfstring{$\sim$OptionPerformance()}{~OptionPerformance()}}
+{\footnotesize\ttfamily Option\+Performance\+::$\sim$\+Option\+Performance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_option_performance_a209d505ba30f62c794dd43ef5beeaea7}\label{class_option_performance_a209d505ba30f62c794dd43ef5beeaea7}} 
+\index{OptionPerformance@{OptionPerformance}!OptionPerformance@{OptionPerformance}}
+\index{OptionPerformance@{OptionPerformance}!OptionPerformance@{OptionPerformance}}
+\doxysubsubsection{\texorpdfstring{OptionPerformance()}{OptionPerformance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Option\+Performance\+::\+Option\+Performance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_option_performance}{Option\+Performance}} \&}]{Option\+Performance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_option_performance_a8a932f86decbc05dfeb54fb18762b553}\label{class_option_performance_a8a932f86decbc05dfeb54fb18762b553}} 
+\index{OptionPerformance@{OptionPerformance}!payoff@{payoff}}
+\index{payoff@{payoff}!OptionPerformance@{OptionPerformance}}
+\doxysubsubsection{\texorpdfstring{payoff()}{payoff()}}
+{\footnotesize\ttfamily double Option\+Performance\+::payoff (\begin{DoxyParamCaption}\item[{const Pnl\+Mat $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Calcule la valeur du payoff sur la trajectoire
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em path} & est une matrice de taille (N+1) x d contenant une trajectoire du modèle telle que créée par la fonction asset. (N = nb\+Time\+Steps\+\_\+) (d = nombre d\textquotesingle{}actifs = size\+\_\+) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+phi(trajectoire) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_option_abe90882a11f5436077425249e3f32204}{Option}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_option_performance_8hpp}{Option\+Performance.\+hpp}}\item 
+src/\mbox{\hyperlink{_option_performance_8cpp}{Option\+Performance.\+cpp}}\end{DoxyCompactItemize}

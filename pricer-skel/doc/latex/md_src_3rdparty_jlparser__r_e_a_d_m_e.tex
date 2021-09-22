@@ -1,0 +1,48 @@
+\hypertarget{md_src_3rdparty_jlparser__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Introduction}\label{md_src_3rdparty_jlparser__r_e_a_d_m_e_autotoc_md1}
+{\bfseries{JLParser}} is a C++ tool to read files with format
+
+This version requires your compiler to support {\ttfamily C++-\/17}. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Some comment}
+\DoxyCodeLine{}
+\DoxyCodeLine{name1 <type1> value1}
+\DoxyCodeLine{name2 <type2> value2}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+ where
+\begin{DoxyItemize}
+\item {\ttfamily name} is a string made of words
+\item {\ttfamily type} can be {\ttfamily int}, {\ttfamily long}, {\ttfamily float}, {\ttfamily vector}, {\ttfamily string} or {\ttfamily void $\ast$}
+\item {\ttfamily value} is the value associated to the key {\ttfamily name} and is supposed to match {\ttfamily type}. Elements of a vector are separated by white spaces.
+\end{DoxyItemize}\hypertarget{md_src_3rdparty_jlparser__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Usage}\label{md_src_3rdparty_jlparser__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git submodule add git@gricad-\/gitlab.univ-\/grenoble-\/alpes.fr:jlparser/parser.git 3rdparty/jlparser}
+\DoxyCodeLine{cd 3rdparty/jlparser}
+\DoxyCodeLine{git submodule update -\/-\/init}
+
+\end{DoxyCode}
+
+
+In your {\ttfamily CMake\+Lists.\+txt}, add
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(CMAKE\_CXX\_STANDARD 17)}
+\DoxyCodeLine{set(CMAKE\_CXX\_STANDARD\_REQUIRED ON)}
+\DoxyCodeLine{set(CMAKE\_CXX\_EXTENSIONS OFF)}
+\DoxyCodeLine{add\_subdirectory(3rdparty/jlparser)}
+\DoxyCodeLine{add\_executable(hello-\/world hello\_world.cpp)}
+\DoxyCodeLine{target\_link\_libraries(hello-\/world jl\_parser)}
+
+\end{DoxyCode}
+ and then simply add {\ttfamily \#include \char`\"{}jlparser/parser.\+hpp\char`\"{}} to your code.
+
+This project has 4 branches\+:
+\begin{DoxyItemize}
+\item The {\ttfamily master} branch is for {\ttfamily C++-\/11} compilers
+\item The {\ttfamily nonstd-\/variant} is for {\ttfamily C++-\/11} compilers. It does not require the full support of the whole {\ttfamily C++-\/11} standard.
+\item The {\ttfamily c++-\/17} branch is for {\ttfamily C++-\/17} compilers
+\item The {\ttfamily boost} branch is for other cases. Note that you need to install the Boost library. 
+\end{DoxyItemize}
