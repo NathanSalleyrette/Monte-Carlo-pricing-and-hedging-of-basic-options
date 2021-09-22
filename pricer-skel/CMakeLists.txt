@@ -51,67 +51,67 @@ target_link_libraries(test-parser jl_parser ${LIBS})
 add_executable(mc-example src/mc_example.cpp)
 target_link_libraries(mc-example jl_parser ${LIBS})
 
-add_executable(Price0 src/Price0.cpp)
-target_link_libraries(Price0 ${LIBS})
+add_executable(price0 src/Price0.cpp)
+target_link_libraries(price0 ${LIBS})
 
-add_executable(Hedge src/Hedge.cpp)
-target_link_libraries(Hedge ${LIBS})
+add_executable(hedge src/Hedge.cpp)
+target_link_libraries(hedge ${LIBS})
 
-##Google Tests
-add_subdirectory(googletest)
+# ##Google Tests
+# add_subdirectory(googletest)
 
 
-enable_testing()
+# enable_testing()
+
+# # add_executable(
+# #   hello_test
+# #   src/hello_test.cpp
+# # )
+# # target_link_libraries(
+# #   hello_test
+# #   gtest_main
+# #   ${LIBS}
+# # )
 
 # add_executable(
-#   hello_test
-#   src/hello_test.cpp
+#    test_basket
+#    src/test_basket.cpp
+#  )
+# target_link_libraries(
+#   test_basket
+#   gtest_main
+#    ${LIBS}
+#  )
+
+# add_executable(
+#   test_asian
+#   src/test_asian.cpp
 # )
 # target_link_libraries(
-#   hello_test
+#   test_asian
 #   gtest_main
 #   ${LIBS}
 # )
 
-add_executable(
-   test_basket
-   src/test_basket.cpp
- )
-target_link_libraries(
-  test_basket
-  gtest_main
-   ${LIBS}
- )
+# add_executable(
+#   test_performance
+#   src/test_performance.cpp
+# )
+# target_link_libraries(
+#   test_performance
+#   gtest_main
+#   ${LIBS}
+# )
 
-add_executable(
-  test_asian
-  src/test_asian.cpp
-)
-target_link_libraries(
-  test_asian
-  gtest_main
-  ${LIBS}
-)
-
-add_executable(
-  test_performance
-  src/test_performance.cpp
-)
-target_link_libraries(
-  test_performance
-  gtest_main
-  ${LIBS}
-)
-
-add_executable(
-  test_portfolio
-  src/test_portfolio.cpp
-)
-target_link_libraries(
-  test_portfolio
-  gtest_main
-  ${LIBS}
-)
+# add_executable(
+#   test_portfolio
+#   src/test_portfolio.cpp
+# )
+# target_link_libraries(
+#   test_portfolio
+#   gtest_main
+#   ${LIBS}
+# )
 
 # include(GoogleTest)
 # gtest_discover_tests(hello_test)
