@@ -9,7 +9,7 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 
     double step = T/(double)nbTimeSteps;
     double sqrtstep = sqrt(step);
-
+    double freeRate = this->r_;
     PnlMat *Gmat = pnl_mat_create(nbTimeSteps, path->m);
     pnl_mat_rng_normal(Gmat, nbTimeSteps, path->m, rng);
 
@@ -23,7 +23,8 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
             LG = pnl_vect_scalar_prod(LignL, LignG);
             
             double Sj = GET(this->sigma_, j);
-            MLET(path, j,i+1) = MGET(path,j , i) * exp((this->r_ - Sj * Sj /2.0) * step + Sj*sqrtstep*LG  );
+            
+            MLET(path, j,i+1) = MGET(path,j , i) * exp((freeRate - Sj * Sj /2.0) * step + Sj*sqrtstep*LG  );
 
 
         }
@@ -31,22 +32,7 @@ void BlackScholesModel :: asset(PnlMat *path, double T, int nbTimeSteps, PnlRng 
 
     pnl_mat_free(&Gmat);
     pnl_vect_free(&LignG);
-    
 
-    // for(int i = 0; i < path->n-1 ; i++ ){
-    //     PnlVect *G = pnl_vect_create(path->m);
-    //     pnl_vect_rng_normal(G, path->m, rng);
-    //     for(int s = 0; s < path->m; s++){
-    //         double LG = 0;
-    //         for(int j = 0 ; j < path->m ; j++){
-    //             LG += L->array[s*path->m +j] * G->array[j];
-    //         } 
-    //         path->array[s*path->n + i+1] = path->array[s*path->n + i] * exp((this->r_ - this->sigma_->array[s] * this->sigma_->array[s] )/2.0 * step + this->sigma_->array[s]*sqrt(step)*LG  );
-    //     }
-    //     //On libère G et L a la sortie des for
-    //     pnl_vect_free(&G);
-    // }
-    // pnl_mat_free(&L);
 
 }
 
@@ -63,7 +49,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
 
     PnlMat *L = this->El;
     PnlVect *LignL = this->LignEl;
-
+    double freeRate = this->r_;
 
     // Création de la matrice G randomisée
     PnlMat *GMat = pnl_mat_create(simuremains, path->m);
@@ -94,7 +80,7 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
                 interstep = step;
             }
             double Sj = GET(this->sigma_, j);
-            LET(S, s) = previous * exp((this->r_ - Sj* Sj /2.0) * (interstep) + Sj*sqrt(interstep)*LG  );
+            LET(S, s) = previous * exp((freeRate - Sj* Sj /2.0) * (interstep) + Sj*sqrt(interstep)*LG  );
 
         }
         pnl_vect_mult_scalar(S, past->array[(j+1)*past->n - 1]);
@@ -111,26 +97,16 @@ void BlackScholesModel :: asset(PnlMat *path, double t, double T, int nbTimeStep
 void BlackScholesModel :: shiftAsset(PnlMat *shift_path, const PnlMat *path, int d, double h, double t, double timestep){
     
 
-    // Nous n'utilisons pas MGET et GET car ils prennent plus de temps que ->array
+    //Nous n'utilisons pas MGET et GET car ils prennent plus de temps que ->array
     for(int i = 0; i < path->n ; i++){
         if(i*timestep < t){
             shift_path->array[d*path->n + i] = path->array[d*path->n + i];
-            //MLET(shift_path,d, i) = MGET(path,d, i);
         }else {
             shift_path->array[d*path->n + i] = (1.0+h)*path->array[d*path->n + i];
-            //MLET(shift_path,d, i) = (1.0+h)*MGET(path,d, i);
         }
     }
 
-    // PnlVect DPathLine = pnl_vect_wrap_mat_row(path, d);
-    // PnlVect DShiftPathLine = pnl_vect_wrap_mat_row(shift_path, d);
-    // for (int i = 0; i < path->n; i++) {
-    //     if(i*timestep < t) {
-    //         LET(&DShiftPathLine, i) = GET(&DPathLine, i);
-    //     } else {
-    //         LET(&DShiftPathLine, i) = (1.0 + h)*GET(&DPathLine, i);
-    //     }
-    // }
+    
 
 
 }
